@@ -81,21 +81,9 @@ Console.Clear();
 
 while (idk.playAgain == true)
 {
-    Console.ForegroundColor = ConsoleColor.Blue;
-    Console.WriteLine($"You: {idk.TvojeScore}");
-    Console.ForegroundColor = ConsoleColor.DarkRed;
-    Console.WriteLine($"Enemy: {idk.EnemyScore}");
-    Console.WriteLine("--------------------");
-    Console.WriteLine("Kolo hráče (tebe):");
-    Console.WriteLine("    1 - kámen");
-    Console.WriteLine("    2 - nůžky");
-    Console.WriteLine("    3 - papír");
-    Console.WriteLine("--------------------");
-    string hrac = Console.ReadLine();
-    Console.Clear();
 
     int volba = generator.Next(1, 4);
-    if(idk.TvojeScore == 5 || idk.EnemyScore == 5)
+    if (idk.TvojeScore == 5 || idk.EnemyScore == 5)
     {
         if (idk.EnemyScore == 5)
         {
@@ -128,8 +116,21 @@ while (idk.playAgain == true)
 
         }
     }
+    Console.ForegroundColor = ConsoleColor.Blue;
+    Console.WriteLine($"You: {idk.TvojeScore}");
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine($"Enemy: {idk.EnemyScore}");
+    Console.WriteLine("--------------------");
+    Console.WriteLine("Kolo hráče (tebe):");
+    Console.WriteLine("    1 - kámen");
+    Console.WriteLine("    2 - nůžky");
+    Console.WriteLine("    3 - papír");
+    Console.WriteLine("--------------------");
+    string hrac = Console.ReadLine();
+    Console.Clear();
 
-     else if (volba == 1)
+
+     if (volba == 1)
      {
         if (hrac == "1")
         {

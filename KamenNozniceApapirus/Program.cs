@@ -1,8 +1,9 @@
 ﻿global using KamenNozniceApapirus;
 global using Spectre.Console;
-
+#region generators
 Random generator = new Random();
 Score idk = new Score();
+#endregion generators
 
 
 #region title
@@ -36,7 +37,8 @@ AnsiConsole.Status()
 #endregion loading
 
 Console.Clear();
-#region diffOption
+
+#region diffOptionMenu
 //AnsiConsole.Write(
 //    new FigletText("write PLAY ")
 //        .LeftAligned()
@@ -49,12 +51,17 @@ Console.Clear();
 //Console.WriteLine("pro ukončení aplikace");
 //Console.WriteLine("---------------------");
 //string odpoved = Console.ReadLine();
-#endregion diffOption
+#endregion diffOptionMenu
+
+#region info
 Console.WriteLine("Menší info na začátek: Tvoje skóre v této hře se ti po výhře sčítá a automaticky převádí do měny (coins).");
 Console.WriteLine("Hra se sa chvíli spustí. Užívej :)");
 Thread.Sleep(15000);
+#endregion info
+
 Console.Clear();
-nwm:
+
+#region MainMenu
 var odpoved = AnsiConsole.Prompt(
     new SelectionPrompt<string>()
         .Title("[green]Vyber z možností[/]")
@@ -92,10 +99,11 @@ if (odpoved == "EXIT")
     Console.Clear();
     Environment.Exit(1);
 }
+#endregion MainMenu
 
 Console.Clear();
 
-
+#region cykly
 while (idk.playAgain == true || idk.restart == true)
 {
     
@@ -148,6 +156,10 @@ while (idk.playAgain == true || idk.restart == true)
     Console.WriteLine("    2 - nůžky");
     Console.WriteLine("    3 - papír");
     Console.WriteLine("--------------------");
+    if (idk.mamtitul == true)
+    {
+        Console.WriteLine("Vlastníš vzácný titul");
+    }
     string hrac = Console.ReadLine();
     Console.Clear();
 
@@ -265,9 +277,10 @@ while (idk.playAgain == true || idk.restart == true)
     Console.ResetColor();
     
 }
+#endregion cykly
 
+#region credit
 var table = new Table().Centered();
-
 AnsiConsole.Live(table)
     .Start(ctx =>
     {
@@ -280,8 +293,11 @@ AnsiConsole.Live(table)
         Thread.Sleep(12000);
 
     });
+#endregion credit
 
 Console.Clear();
+
+#region shopmenu
 Loop:
 Console.BackgroundColor = ConsoleColor.DarkGray;
 Console.ForegroundColor = ConsoleColor.White;
@@ -359,7 +375,9 @@ if (odpoved2 == "SHOP (beta)")
             idk.celkoveTvojeScore = -50;
             Console.WriteLine("Nyní jste si koupil TITUL. Napište prosím své jméno:");
             string uzivateljmeno = Console.ReadLine();
-            Console.WriteLine($"{uzivateljmeno} ten NEJLEPŠÍ Z NEJLEPŠÍCH");
+            Console.WriteLine($"{uzivateljmeno}.Ten NEJLEPŠÍ Z NEJLEPŠÍCH");
+            idk.mamtitul = true;
+            
         }
         else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.celkoveTvojeScore! > 50)
         {
@@ -402,3 +420,4 @@ if (odpoved2 == "EXIT")
     Console.Clear();
     Environment.Exit(1);
 }
+#endregion shopmenu

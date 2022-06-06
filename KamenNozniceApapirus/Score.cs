@@ -14,12 +14,14 @@ namespace KamenNozniceApapirus
        public bool playAgain { get; set; }
         public bool restart { get; set; }
         public bool mamtitul { get; set; }
+        public bool doubleskore { get; set; }
         public void lol()
         {
+            doubleskore = true;
             mamtitul = false;
-            TvojeScore = 0;
-            EnemyScore = 0;
-            celkoveTvojeScore = 0;
+            //TvojeScore = 0;
+            //EnemyScore = 0;
+            //celkoveTvojeScore = 0;
             
         }
     }

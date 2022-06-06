@@ -37,19 +37,26 @@ AnsiConsole.Status()
 
 Console.Clear();
 
-AnsiConsole.Write(
-    new FigletText("write PLAY ")
-        .LeftAligned()
-        .Color(Color.Green));
-Console.WriteLine("pro spuštění hry");
-AnsiConsole.Write(
-    new FigletText("write EXIT")
-        .LeftAligned()
-        .Color(Color.Yellow));
-Console.WriteLine("pro ukončení aplikace");
-Console.WriteLine("---------------------");
-
-string odpoved = Console.ReadLine();
+//AnsiConsole.Write(
+//    new FigletText("write PLAY ")
+//        .LeftAligned()
+//        .Color(Color.Green));
+//Console.WriteLine("pro spuštění hry");
+//AnsiConsole.Write(
+//    new FigletText("write EXIT")
+//        .LeftAligned()
+//        .Color(Color.Yellow));
+//Console.WriteLine("pro ukončení aplikace");
+//Console.WriteLine("---------------------");
+var odpoved = AnsiConsole.Prompt(
+    new SelectionPrompt<string>()
+        .Title("[green]Vyber z možností[/]")
+        .PageSize(25)
+        .AddChoices(new[] {
+            "PLAY", "EXIT"
+        })) ;
+Console.WriteLine("----------------------");
+//string odpoved = Console.ReadLine();
 if (odpoved == "PLAY")
 {
     idk.playAgain = true;
@@ -163,7 +170,6 @@ while (idk.playAgain == true)
             Console.WriteLine("nepřítel zvolil papír");
             Console.WriteLine("prohrál si");
             idk.EnemyScore++;
-
         }
         else if (hrac == "3")
         {
@@ -210,9 +216,6 @@ while (idk.playAgain == true)
 
         }
     }
-
-
-
 }
 
 var table = new Table().Centered();
@@ -226,5 +229,40 @@ AnsiConsole.Live(table)
 
         table.AddColumn("Lukáš Punt :)");
         ctx.Refresh();
-        Thread.Sleep(1000);
+        Thread.Sleep(2000);
     });
+
+
+Console.Clear();
+var odpoved2 = AnsiConsole.Prompt(
+    new SelectionPrompt<string>()
+        .Title("[green]Vyber z možností[/]")
+        .PageSize(25)
+        .AddChoices(new[] {
+            "RESTART", "EXIT"
+        }));
+Console.WriteLine("----------------------");
+if (odpoved2 == "RESTART")
+{
+    idk.playAgain = true;
+}
+if (odpoved2 == "EXIT")
+{
+    AnsiConsole.Status()
+    .Start("Processing...", ctx =>
+    {
+
+        AnsiConsole.MarkupLine("loading answer...");
+        Thread.Sleep(3000);
+
+        ctx.Status("...");
+        ctx.Spinner(Spinner.Known.Star);
+        ctx.SpinnerStyle(Style.Parse("green"));
+
+        AnsiConsole.MarkupLine("NASCHLE PANE");
+        Thread.Sleep(2000);
+    });
+    Thread.Sleep(3000);
+    Console.Clear();
+    Environment.Exit(1);
+}

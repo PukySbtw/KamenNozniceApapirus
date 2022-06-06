@@ -3,6 +3,7 @@ global using Spectre.Console;
 #region generators
 Random generator = new Random();
 Score idk = new Score();
+idk.lol();
 #endregion generators
 
 
@@ -56,7 +57,7 @@ Console.Clear();
 #region info
 Console.WriteLine("Menší info na začátek: Tvoje skóre v této hře se ti po výhře sčítá a automaticky převádí do měny (coins).");
 Console.WriteLine("Hra se sa chvíli spustí. Užívej :)");
-Thread.Sleep(15000);
+Thread.Sleep(150);
 #endregion info
 
 Console.Clear();
@@ -104,7 +105,7 @@ if (odpoved == "EXIT")
 Console.Clear();
 
 #region cykly
-while (idk.playAgain == true || idk.restart == true)
+while (idk.playAgain == true)
 {
     
     int volba = generator.Next(1, 4);
@@ -131,7 +132,8 @@ while (idk.playAgain == true || idk.restart == true)
         {
 
             Console.Clear();
-            idk.celkoveTvojeScore =+ 5;
+            idk.celkoveTvojeScore+= 5;
+         
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Vyhrál si! Tvoje score je 5");
             #region ukazatelskore2
@@ -144,6 +146,11 @@ while (idk.playAgain == true || idk.restart == true)
             #endregion ukazatelskore2
             break;
           
+        }
+        if (idk.doubleskore == true)
+        {
+            idk.celkoveTvojeScore += 5;
+            break;
         }
     }
     Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -309,7 +316,7 @@ var odpoved2 = AnsiConsole.Prompt(
         .Title("[green]Vyber z možností[/]")
         .PageSize(25)
         .AddChoices(new[] {
-            "RESTART","SHOP (beta)", "EXIT"
+            "RESTART","SHOP (beta)","Double score!", "EXIT"
         }));
 if (odpoved2 == "RESTART")
 {
@@ -336,8 +343,10 @@ if (odpoved2 == "SHOP (beta)")
         });
     Thread.Sleep(1000);
     Console.Clear();
-    backtoshop:
-    nemamlove:
+
+
+    
+    
     Console.BackgroundColor = ConsoleColor.DarkGray;
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
@@ -351,7 +360,9 @@ if (odpoved2 == "SHOP (beta)")
         .PageSize(25)
         .AddChoices(new[] {
             "Perk Procenta","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír","", "zpět do menu"
+      
         }));
+nemamlove: backtoshop:
     if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír")
     {
         Console.Clear();
@@ -362,7 +373,7 @@ if (odpoved2 == "SHOP (beta)")
         Console.WriteLine("------------------------------------------");
 
         Console.WriteLine("Tento titul si zaslouží jenom ten nejtvrdší z kameňáků, neostřejší z nožnic a najrovnější z papírů !");
-        Console.WriteLine("Titul stojí 50 skóre!");
+        Console.WriteLine("Titul stojí 50 coins!");
         var Titulbuy = AnsiConsole.Prompt(
         new SelectionPrompt<string>()
             .Title("[green]Chcete si koupit Titul ?[/]")
@@ -372,17 +383,17 @@ if (odpoved2 == "SHOP (beta)")
             }));
         if (Titulbuy == "Ano" && idk.celkoveTvojeScore == 50 || idk.celkoveTvojeScore > 50)
         {
-            idk.celkoveTvojeScore = -50;
+            idk.celkoveTvojeScore = idk.celkoveTvojeScore - 50;
             Console.WriteLine("Nyní jste si koupil TITUL. Napište prosím své jméno:");
             string uzivateljmeno = Console.ReadLine();
             Console.WriteLine($"{uzivateljmeno}.Ten NEJLEPŠÍ Z NEJLEPŠÍCH");
             idk.mamtitul = true;
             
         }
-        else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.celkoveTvojeScore! > 50)
+        else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.celkoveTvojeScore >50)
         {
             Console.Clear();
-            Console.WriteLine("Vypadá to že nemáte dostatek skóre na koupi tohoto TITULU... (Po chvilce vás to hodí zpět do obchodu)");
+            Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi tohoto TITULU... (Po chvilce vás to hodí zpět do obchodu)");
             Thread.Sleep(12000);
             Console.Clear();
             goto nemamlove;
@@ -396,6 +407,38 @@ if (odpoved2 == "SHOP (beta)")
     if (odpoved3 == "zpět do menu")
     {
         goto Loop;
+    }
+}
+nemamlove2: backtoshop2:
+if (odpoved2 == "Double score!")
+{
+    Console.WriteLine("Tato funkce vám dává 2x více coins za výhru...");
+    Console.WriteLine("Doublse score stojí 65 coins");
+    var DblScr = AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title("[green]Chcete si koupit Double score ?[/]")
+            .PageSize(25)
+            .AddChoices(new[] {
+            "Ano", "ne"
+            }));
+    if (DblScr == "Ano" && idk.celkoveTvojeScore == 65 || idk.celkoveTvojeScore > 65)
+    {
+        idk.celkoveTvojeScore = idk.celkoveTvojeScore - 65;
+        Console.WriteLine("Zakoupil jste si Double score!");
+        idk.doubleskore = true;
+    }
+    else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 || idk.celkoveTvojeScore >65)
+    {
+        Console.Clear();
+        Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi Double score!... (Po chvilce vás to hodí zpět do obchodu)");
+        Thread.Sleep(12000);
+        Console.Clear();
+        goto nemamlove2;
+    }
+    if (DblScr == "ne")
+    {
+        Console.Clear();
+        goto backtoshop2;
     }
 }
 if (odpoved2 == "EXIT")

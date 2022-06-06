@@ -239,12 +239,16 @@ var odpoved2 = AnsiConsole.Prompt(
         .Title("[green]Vyber z možností[/]")
         .PageSize(25)
         .AddChoices(new[] {
-            "RESTART", "EXIT"
+            "RESTART", "EXIT","SHOP"
         }));
 Console.WriteLine("----------------------");
 if (odpoved2 == "RESTART")
 {
-    idk.playAgain = true;
+    //idk.playAgain = true;
+}
+if (odpoved2 == "SHOP")
+{
+
 }
 if (odpoved2 == "EXIT")
 {
@@ -263,6 +267,6 @@ if (odpoved2 == "EXIT")
         Thread.Sleep(2000);
     });
     Thread.Sleep(3000);
-    Console.Clear();
+    //Console.Clear();
     Environment.Exit(1);
 }

@@ -189,20 +189,20 @@ while (idk.playAgain == true)
         {
             Console.WriteLine("nepřítel zvolil nůžky");
             Console.WriteLine("vyhrál si!");
-
+            idk.TvojeScore++;
 
         }
         else if (hrac == "3")
         {
             Console.WriteLine("nepřítel zvolil kámen");
             Console.WriteLine("vyhrál si");
-
+            idk.TvojeScore++;
         }
         else if (hrac == "2")
         {
             Console.WriteLine("nepřítel zvolil papír");
             Console.WriteLine("vyhrál si");
-
+            idk.TvojeScore++;
         }
         else
         {

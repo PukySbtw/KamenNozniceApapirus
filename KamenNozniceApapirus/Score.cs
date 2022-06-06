@@ -13,8 +13,10 @@ namespace KamenNozniceApapirus
         public int EnemyScore { get; set; }
        public bool playAgain { get; set; }
         public bool restart { get; set; }
+        public bool mamtitul { get; set; }
         public void lol()
         {
+            mamtitul = false;
             TvojeScore = 0;
             EnemyScore = 0;
             celkoveTvojeScore = 0;

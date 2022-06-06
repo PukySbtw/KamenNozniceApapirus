@@ -23,7 +23,7 @@ AnsiConsole.Status()
 
         AnsiConsole.MarkupLine("Loading...");
         Thread.Sleep(3000);
-
+       
 
         ctx.Status("...");
         ctx.Spinner(Spinner.Known.Star);
@@ -50,6 +50,10 @@ Console.Clear();
 //Console.WriteLine("---------------------");
 //string odpoved = Console.ReadLine();
 #endregion diffOption
+Console.WriteLine("Menší info na začátek: Tvoje skóre v této hře se ti po výhře sčítá a automaticky převádí do měny (coins).");
+Console.WriteLine("Hra se sa chvíli spustí. Užívej :)");
+Thread.Sleep(15000);
+Console.Clear();
 nwm:
 var odpoved = AnsiConsole.Prompt(
     new SelectionPrompt<string>()
@@ -63,6 +67,7 @@ if (odpoved == "PLAY")
 {
 
     idk.playAgain = true;
+    
     
 }
 if (odpoved == "EXIT")
@@ -80,7 +85,7 @@ if (odpoved == "EXIT")
         ctx.SpinnerStyle(Style.Parse("green"));
 
 
-        AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace)");
+        AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
         Thread.Sleep(2000);
     });
     Thread.Sleep(3000);
@@ -254,7 +259,9 @@ while (idk.playAgain == true || idk.restart == true)
     }
     Console.BackgroundColor = ConsoleColor.DarkGray;
     Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine($"Tvoje celkové skóre je: {idk.celkoveTvojeScore}");
+    Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+    Console.ResetColor();
+    Console.WriteLine("------------------------------------------");
     Console.ResetColor();
     
 }
@@ -270,7 +277,7 @@ AnsiConsole.Live(table)
 
         table.AddColumn("Lukáš Punt :)");
         ctx.Refresh();
-        Thread.Sleep(2000);
+        Thread.Sleep(12000);
 
     });
 
@@ -278,7 +285,7 @@ Console.Clear();
 Loop:
 Console.BackgroundColor = ConsoleColor.DarkGray;
 Console.ForegroundColor = ConsoleColor.White;
-Console.WriteLine($"Tvoje celkové skóre je: {idk.celkoveTvojeScore}");
+Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
 Console.ResetColor();
 Console.WriteLine("------------------------------------------");
 var odpoved2 = AnsiConsole.Prompt(
@@ -290,7 +297,7 @@ var odpoved2 = AnsiConsole.Prompt(
         }));
 if (odpoved2 == "RESTART")
 {
-    goto nwm;
+    
 }
 if (odpoved2 == "SHOP (beta)")
 {
@@ -317,7 +324,7 @@ if (odpoved2 == "SHOP (beta)")
     nemamlove:
     Console.BackgroundColor = ConsoleColor.DarkGray;
     Console.ForegroundColor = ConsoleColor.White;
-    Console.WriteLine($"Tvoje celkové skóre je: {idk.celkoveTvojeScore}");
+    Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
     Console.ResetColor();
     Console.WriteLine("------------------------------------------");
 
@@ -327,14 +334,14 @@ if (odpoved2 == "SHOP (beta)")
         .Title("[green][/]")
         .PageSize(25)
         .AddChoices(new[] {
-            "Perk Procenta","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír", "zpět do menu"
+            "Perk Procenta","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír","", "zpět do menu"
         }));
     if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír")
     {
         Console.Clear();
         Console.BackgroundColor = ConsoleColor.DarkGray;
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine($"Tvoje celkové skóre je: {idk.celkoveTvojeScore}");
+        Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
         Console.ResetColor();
         Console.WriteLine("------------------------------------------");
 
@@ -358,7 +365,7 @@ if (odpoved2 == "SHOP (beta)")
         {
             Console.Clear();
             Console.WriteLine("Vypadá to že nemáte dostatek skóre na koupi tohoto TITULU... (Po chvilce vás to hodí zpět do obchodu)");
-            Thread.Sleep(3000);
+            Thread.Sleep(12000);
             Console.Clear();
             goto nemamlove;
         }
@@ -376,20 +383,22 @@ if (odpoved2 == "SHOP (beta)")
 if (odpoved2 == "EXIT")
 {
     AnsiConsole.Status()
-    .Start("Processing...", ctx =>
-    {
+   .Start("Processing...", ctx =>
+   {
 
-        AnsiConsole.MarkupLine("loading answer...");
-        Thread.Sleep(3000);
+       AnsiConsole.MarkupLine("loading answer...");
+       Thread.Sleep(3000);
 
-        ctx.Status("...");
-        ctx.Spinner(Spinner.Known.Star);
-        ctx.SpinnerStyle(Style.Parse("green"));
 
-        AnsiConsole.MarkupLine("NASCHLE PANE");
-        Thread.Sleep(2000);
-    });
+       ctx.Status("...");
+       ctx.Spinner(Spinner.Known.Star);
+       ctx.SpinnerStyle(Style.Parse("green"));
+
+
+       AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
+       Thread.Sleep(2000);
+   });
     Thread.Sleep(3000);
-    //Console.Clear();
+    Console.Clear();
     Environment.Exit(1);
 }

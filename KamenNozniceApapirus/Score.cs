@@ -29,7 +29,7 @@ namespace KamenNozniceApapirus
             scissorsG = false;
             paperG = false;
             rockG = false;
-            celkoveTvojeScore = 200;
+            celkoveTvojeScore = 0;
             doubleskore = false;
             mamtitul = false;
             sestsestsest = false;

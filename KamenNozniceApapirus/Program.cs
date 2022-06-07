@@ -173,6 +173,13 @@ while (true)
             Console.WriteLine("Vlastníš vzácný titul");
             Console.ResetColor();
         }
+        if (idk.doubleskore ==true)
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("Double score je zapnutý");
+            Console.ResetColor();
+        }
         string hrac = Console.ReadLine();
         Console.Clear();
 
@@ -312,6 +319,8 @@ while (true)
 
 #region shopmenu
 Loop:
+dvacet:
+    sesthotovo:
     Console.BackgroundColor = ConsoleColor.DarkGray;
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
@@ -322,14 +331,61 @@ Loop:
             .Title("[green]Vyber z možností[/]")
             .PageSize(25)
             .AddChoices(new[] {
-            "RESTART","SHOP (beta)", "EXIT"
+            "RESTART","SHOP (beta)", "Reedem code","EXIT"
             }));
+    #region restart
     if (odpoved2 == "RESTART")
     {
         idk.EnemyScore = 0;
         idk.TvojeScore = 0;
         continue;
     }
+    #endregion restart
+    if (odpoved2 == "Reedem code")
+    {
+        Console.Clear();
+        Console.BackgroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+        Console.ResetColor();
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine("Napište code:");
+        int code = Convert.ToInt32(Console.ReadLine());
+        if (code == 666 && idk.sestsestsest == false)
+        {
+            idk.celkoveTvojeScore += 666;
+            idk.sestsestsest = true;
+            Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 666 coins a máte {idk.celkoveTvojeScore} :)");
+            Thread.Sleep(2666);
+            Console.Clear();
+            goto sesthotovo;
+        }
+        else if (code == 666 && idk.sestsestsest == true)
+        {
+            Console.WriteLine("Code byl již využit :)");
+            Thread.Sleep(2666);
+            Console.Clear();
+            goto sesthotovo;
+        }
+
+        if (code == 420 && idk.ctiristadvacet == false)
+        {
+            idk.celkoveTvojeScore += 420;
+            idk.ctiristadvacet = true;
+            Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 420 coins a máte {idk.celkoveTvojeScore} :)");
+            Thread.Sleep(2420);
+            Console.Clear();
+            goto dvacet;
+        }
+        else if (code == 420 && idk.ctiristadvacet == true)
+        {
+            Console.WriteLine("Code byl již využit :)");
+            Thread.Sleep(2420);
+            Console.Clear();
+            goto dvacet;
+        }
+    }
+    #region shopbeta.
     if (odpoved2 == "SHOP (beta)")
     {
         await AnsiConsole.Progress()
@@ -349,12 +405,15 @@ Loop:
 
                 }
             });
-        Thread.Sleep(10000);
+        Thread.Sleep(750);
         Console.Clear();
-
-
-
-
+    nemamlove:
+    backtoshop:
+    nemamlove2:
+    backtoshop2:
+    dblyes:
+   titulbuy:
+           
         Console.BackgroundColor = ConsoleColor.DarkGray;
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
@@ -370,7 +429,7 @@ Loop:
             "Perk Procenta","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír","Double score", "zpět do menu"
 
             }));
-    nemamlove: backtoshop:
+ 
         if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír")
         {
             Console.Clear();
@@ -389,19 +448,26 @@ Loop:
                 .AddChoices(new[] {
             "Ano", "ne"
                 }));
-            if (Titulbuy == "Ano" && idk.celkoveTvojeScore >= 50 || idk.mamtitul == false)
+            if (Titulbuy == "Ano" && idk.celkoveTvojeScore >= 50 && idk.mamtitul == false)
             {
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 50;
                 Console.WriteLine("Nyní jste si koupil TITUL. Napište prosím své jméno:");
                 string uzivateljmeno = Console.ReadLine();
-                Console.WriteLine($"{uzivateljmeno}.Ten NEJLEPŠÍ Z NEJLEPŠÍCH");
+                Console.BackgroundColor= ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{uzivateljmeno} vlastní vzácný titul!");
+                Console.ResetColor();
                 idk.mamtitul = true;
+                Thread.Sleep(2500);
+                Console.Clear();
+                goto titulbuy;
 
             }
-            else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.celkoveTvojeScore < 50 || idk.mamtitul == true)
+            else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 && idk.mamtitul == true || idk.celkoveTvojeScore < 50 && idk.mamtitul == true)
             {
                 Console.Clear();
-                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi tohoto TITULU, nebo TITUL již vlastníš... (Po chvilce vás to hodí zpět do obchodu)");
+                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi tohoto TITULU, nebo TITUL již vlastníš...");
+                Console.WriteLine("(Po chvilce vás to hodí zpět do obchodu)");
                 Thread.Sleep(5000);
                 Console.Clear();
                 goto nemamlove;
@@ -414,14 +480,15 @@ Loop:
         }
         if (odpoved3 == "zpět do menu")
         {
+            Console.Clear();
             goto Loop;
         }
-
-    nemamlove2: backtoshop2:
+      
+   
         if (odpoved3 == "Double score")
         {
             Console.WriteLine("Tato funkce vám dává 2x více coins za výhru...");
-            Console.WriteLine("Doublse score stojí 65 coins");
+            Console.WriteLine("Double score stojí 65 coins");
             var DblScr = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("[green]Chcete si koupit Double score ?[/]")
@@ -429,16 +496,23 @@ Loop:
                     .AddChoices(new[] {
             "Ano", "ne"
                     }));
-            if (DblScr == "Ano" && idk.celkoveTvojeScore >= 65 || idk.doubleskore == false)
+            if (DblScr == "Ano" && idk.celkoveTvojeScore >= 65 && idk.doubleskore == false)
             {
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 65;
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Zakoupil jste si Double score!");
+                Console.ResetColor();
                 idk.doubleskore = true;
+                Thread.Sleep(2500);
+                Console.Clear();
+                goto dblyes;
             }
-            else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 || idk.celkoveTvojeScore < 65 || idk.doubleskore == true)
+            else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 && idk.doubleskore == true || idk.celkoveTvojeScore < 65 && idk.doubleskore == true)
             {
                 Console.Clear();
-                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi Double score, nebo máte double score již zakoupeno... (Po chvilce vás to hodí zpět do obchodu)");
+                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi Double score, nebo máte double score již zakoupeno...");
+                Console.WriteLine("(Po chvilce vás to hodí zpět do obchodu)");
                 Thread.Sleep(5000);
                 Console.Clear();
                 goto nemamlove2;
@@ -448,7 +522,10 @@ Loop:
                 Console.Clear();
                 goto backtoshop2;
             }
+            
         }
+        #endregion shopbeta.
+        #region exitshop
         if (odpoved2 == "EXIT")
         {
             AnsiConsole.Status()
@@ -471,7 +548,10 @@ Loop:
             Console.Clear();
             Environment.Exit(1);
         }
+
+
     }
+    #endregion exitshop
     idk.ResetSkore();
 }
 #endregion shopmenu

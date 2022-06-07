@@ -21,8 +21,10 @@ namespace KamenNozniceApapirus
         public int doublecost { get; set; }
         public int procentocost { get; set; }
         public int titulcost { get; set; }
+        public bool rockG { get; set; }
         public void lol()
         {
+            rockG = false;
             celkoveTvojeScore = 200;
             doubleskore = false;
             mamtitul = false;
@@ -31,16 +33,7 @@ namespace KamenNozniceApapirus
             doublecost = 65;
             procentocost = 25;
             titulcost = 50;
-            //TvojeScore = 0;
-            //EnemyScore = 0;
-            //celkoveTvojeScore = 0;
             
-        }
-        public void Obchod()
-        {
-       
-
-
         }
         public void ResetSkore()
         {

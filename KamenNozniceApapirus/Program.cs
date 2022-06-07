@@ -354,8 +354,71 @@ dvacet:
             .Title("[green]Vyber z možností[/]")
             .PageSize(25)
             .AddChoices(new[] {
-            "RESTART","SHOP (beta)", "Reedem code","EXIT"
+            "RESTART","SHOP (beta)","Skins (beta)", "Reedem code","EXIT"
             }));
+    backrock:
+    if (odpoved2 == "Skins (beta)")
+    {
+        var skinsanswer = AnsiConsole.Prompt(
+      new SelectionPrompt<string>()
+          .Title("[green]GOLDEN VIP SKINS NOW!!![/]")
+          .PageSize(25)
+          .AddChoices(new[] {
+            "Golden rock","Golden paper","Golden scissors", "zpět do menu"
+          }));
+        if (skinsanswer == "zpět do menu")
+        {
+            Console.Clear();
+            goto Loop;
+        }
+        if (skinsanswer == "Golden rock")
+        {
+            Console.WriteLine("Tento Skin je jen pro nejlepší kámen hráče!");
+            Console.WriteLine("Skin stojí 200 coins!");
+            var Rockbuy = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[green]Chcete si koupit Skin ?[/]")
+                .PageSize(25)
+                .AddChoices(new[] {
+            "Ano", "ne"
+                }));
+
+            if (Rockbuy == "Ano" && idk.celkoveTvojeScore >= 200 && idk.rockG == false)
+            {
+                idk.celkoveTvojeScore -= 200;
+                Console.WriteLine("Zakoupil jste si kámen a váš rock skin vypadá takto:");
+                var image = new CanvasImage("obrazky/GoldenRock.png.png");
+
+
+                image.MaxWidth(48);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 || idk.celkoveTvojeScore  < 200 && idk.rockG == true)
+            {
+                Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
+                if (idk.rockG == true)
+                {
+                    Console.WriteLine("Skin již vlastníš");
+                }
+                Thread.Sleep(4000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (Rockbuy == "ne")
+            {
+                Console.Clear();
+                goto backrock;
+            }
+
+            
+        }
+        
+    }
     #region restart
     if (odpoved2 == "RESTART")
     {

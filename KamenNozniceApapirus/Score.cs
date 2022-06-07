@@ -25,6 +25,11 @@ namespace KamenNozniceApapirus
             //celkoveTvojeScore = 0;
             
         }
+        public void ResetSkore()
+        {
+            TvojeScore = 0;
+            EnemyScore = 0;
+        }
     }
     
 }

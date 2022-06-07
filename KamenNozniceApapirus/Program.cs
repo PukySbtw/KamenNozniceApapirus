@@ -341,6 +341,8 @@ while (true)
     Console.Clear();
 
 #region shopmenu
+
+#region obchodnabidka
 Loop:
 dvacet:
     sesthotovo:
@@ -355,8 +357,12 @@ dvacet:
             .PageSize(25)
             .AddChoices(new[] {
             "RESTART","SHOP (beta)","Skins (beta)", "Reedem code","EXIT"
-            }));
-    backrock:
+
+           }));
+#endregion onchodnabidka
+
+#region skins
+backrock:
     if (odpoved2 == "Skins (beta)")
     {
         Console.Clear();
@@ -551,6 +557,8 @@ dvacet:
         }
         
     }
+    #endregion skins
+
     #region restart
     if (odpoved2 == "RESTART")
     {
@@ -559,6 +567,8 @@ dvacet:
         continue;
     }
     #endregion restart
+
+    #region exit3
     if (odpoved2 == "EXIT")
     {
         AnsiConsole.Status()
@@ -581,7 +591,9 @@ dvacet:
         Console.Clear();
         Environment.Exit(1);
     }
+    #endregion exit3
 
+    #region codes
     if (odpoved2 == "Reedem code")
     {
         Console.Clear();
@@ -639,7 +651,10 @@ dvacet:
             goto dvacet;
         }
     }
+    #endregion code
+
     #region shopbeta.
+ 
     if (odpoved2 == "SHOP (beta)")
     {
         await AnsiConsole.Progress()
@@ -683,7 +698,7 @@ dvacet:
             "Perk Procenta - cost: 25 coins","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins","Double score - cost: 65 coins", "zpět do menu"
 
             }));
- 
+        #region procenta
         if (odpoved3 == "Perk Procenta - cost: 25 coins")
         {
             Console.Clear();
@@ -692,6 +707,8 @@ dvacet:
             Console.Clear();
             goto backtoshop;
         }
+        #endregion procenta
+        #region titul
         if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins")
         {
             Console.Clear();
@@ -741,12 +758,15 @@ dvacet:
                 goto backtoshop;
             }
         }
+        #endregion titul
+        #region backtomenu
         if (odpoved3 == "zpět do menu")
         {
             Console.Clear();
             goto Loop;
         }
-      
+        #endregion backtomenu
+        #region doublescore
         if (odpoved3 == "Double score - cost: 65 coins")
         {
             Console.Clear();
@@ -794,6 +814,7 @@ dvacet:
                 goto backtoshop2;
             }
         }
+        #endregion doublescore
         #endregion shopbeta.
     }
     idk.ResetSkore();

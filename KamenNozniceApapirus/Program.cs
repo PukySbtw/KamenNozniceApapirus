@@ -355,7 +355,9 @@ dvacet:
         {
             idk.celkoveTvojeScore += 666;
             idk.sestsestsest = true;
+            Console.ForegroundColor= ConsoleColor.DarkRed;
             Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 666 coins a máte {idk.celkoveTvojeScore} :)");
+            Console.ResetColor();
             Thread.Sleep(2666);
             Console.Clear();
             goto sesthotovo;
@@ -372,7 +374,9 @@ dvacet:
         {
             idk.celkoveTvojeScore += 420;
             idk.ctiristadvacet = true;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 420 coins a máte {idk.celkoveTvojeScore} :)");
+            Console.ResetColor();
             Thread.Sleep(2420);
             Console.Clear();
             goto dvacet;
@@ -381,6 +385,15 @@ dvacet:
         {
             Console.WriteLine("Code byl již využit :)");
             Thread.Sleep(2420);
+            Console.Clear();
+            goto dvacet;
+            
+        }
+        if (code != 666 || code != 420)
+        {
+            Console.Clear();
+            Console.WriteLine("Byl zadán špatný kód!");
+            Thread.Sleep(2500);
             Console.Clear();
             goto dvacet;
         }

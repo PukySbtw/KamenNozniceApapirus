@@ -18,6 +18,9 @@ namespace KamenNozniceApapirus
         public bool doubleskore { get; set; }
         public bool sestsestsest { get; set; }
         public bool ctiristadvacet { get; set; }
+        public int doublecost { get; set; }
+        public int procentocost { get; set; }
+        public int titulcost { get; set; }
         public void lol()
         {
             celkoveTvojeScore = 200;
@@ -25,6 +28,9 @@ namespace KamenNozniceApapirus
             mamtitul = false;
             sestsestsest = false;
             ctiristadvacet = false;
+            doublecost = 65;
+            procentocost = 25;
+            titulcost = 50;
             //TvojeScore = 0;
             //EnemyScore = 0;
             //celkoveTvojeScore = 0;

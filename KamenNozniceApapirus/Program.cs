@@ -463,6 +463,8 @@ dvacet:
                 }));
             if (Titulbuy == "Ano" && idk.celkoveTvojeScore >= 50 && idk.mamtitul == false)
             {
+             
+
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 50;
                 Console.WriteLine("Nyní jste si koupil TITUL. Napište prosím své jméno:");
                 string uzivateljmeno = Console.ReadLine();
@@ -500,6 +502,13 @@ dvacet:
    
         if (odpoved3 == "Double score")
         {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+
             Console.WriteLine("Tato funkce vám dává 2x více coins za výhru...");
             Console.WriteLine("Double score stojí 65 coins");
             var DblScr = AnsiConsole.Prompt(
@@ -511,6 +520,8 @@ dvacet:
                     }));
             if (DblScr == "Ano" && idk.celkoveTvojeScore >= 65 && idk.doubleskore == false)
             {
+                
+
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 65;
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Green;

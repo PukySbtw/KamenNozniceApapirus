@@ -22,8 +22,12 @@ namespace KamenNozniceApapirus
         public int procentocost { get; set; }
         public int titulcost { get; set; }
         public bool rockG { get; set; }
+        public bool paperG { get; set; }
+        public bool scissorsG { get; set; }
         public void lol()
         {
+            scissorsG = false;
+            paperG = false;
             rockG = false;
             celkoveTvojeScore = 200;
             doubleskore = false;

@@ -120,6 +120,19 @@ while (true)
             Thread.Sleep(2000);
         });
         Thread.Sleep(3000);
+        var table = new Table().Centered();
+        AnsiConsole.Live(table)
+            .Start(ctx =>
+            {
+                table.AddColumn("MADE BY:");
+                ctx.Refresh();
+                Thread.Sleep(1000);
+
+                table.AddColumn("Lukáš Punt :)");
+                ctx.Refresh();
+                Thread.Sleep(1200);
+
+            });
         Console.Clear();
         Environment.Exit(1);
     }
@@ -321,19 +334,19 @@ while (true)
     #endregion cykly
 
     #region credit
-    var table = new Table().Centered();
-    AnsiConsole.Live(table)
-        .Start(ctx =>
-        {
-            table.AddColumn("MADE BY:");
-            ctx.Refresh();
-            Thread.Sleep(1000);
+    //var table = new Table().Centered();
+    //AnsiConsole.Live(table)
+    //    .Start(ctx =>
+    //    {
+    //        table.AddColumn("MADE BY:");
+    //        ctx.Refresh();
+    //        Thread.Sleep(1000);
 
-            table.AddColumn("Lukáš Punt :)");
-            ctx.Refresh();
-            Thread.Sleep(1200);
+    //        table.AddColumn("Lukáš Punt :)");
+    //        ctx.Refresh();
+    //        Thread.Sleep(1200);
 
-        });
+    //    });
     Console.WriteLine("Stiskněte jakoukoliv klávesu pro SHOP menu!");
     Console.ReadKey();
     #endregion credit
@@ -411,7 +424,7 @@ backrock:
                 var image = new CanvasImage("obrazky/GoldenScissors.png.png");
 
 
-                image.MaxWidth(48);
+                image.MaxWidth(16);
 
 
                 AnsiConsole.Write(image);
@@ -468,7 +481,7 @@ backrock:
                 var image = new CanvasImage("obrazky/GoldenPaper.png.jpg");
 
 
-                image.MaxWidth(48);
+                image.MaxWidth(16);
 
 
                 AnsiConsole.Write(image);
@@ -476,7 +489,7 @@ backrock:
                 Console.Clear();
                 goto backrock;
             }
-            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 && idk.paperG == true || idk.celkoveTvojeScore < 200 && idk.paperG == true)
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 && idk.paperG == true ||  idk.celkoveTvojeScore < 200 && idk.paperG == true)
             {
                 Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
                 if (idk.paperG == true)
@@ -525,7 +538,7 @@ backrock:
                 var image = new CanvasImage("obrazky/GoldenRock.png.png");
 
 
-                image.MaxWidth(48);
+                image.MaxWidth(16);
 
 
                 AnsiConsole.Write(image);
@@ -588,6 +601,19 @@ backrock:
            Thread.Sleep(2000);
        });
         Thread.Sleep(3000);
+        var table = new Table().Centered();
+        AnsiConsole.Live(table)
+            .Start(ctx =>
+            {
+                table.AddColumn("MADE BY:");
+                ctx.Refresh();
+                Thread.Sleep(1000);
+
+                table.AddColumn("Lukáš Punt :)");
+                ctx.Refresh();
+                Thread.Sleep(1200);
+
+            });
         Console.Clear();
         Environment.Exit(1);
     }

@@ -18,9 +18,6 @@ namespace KamenNozniceApapirus
         public bool doubleskore { get; set; }
         public bool sestsestsest { get; set; }
         public bool ctiristadvacet { get; set; }
-        public int doublecost { get; set; }
-        public int procentocost { get; set; }
-        public int titulcost { get; set; }
         public bool rockG { get; set; }
         public bool paperG { get; set; }
         public bool scissorsG { get; set; }
@@ -34,9 +31,7 @@ namespace KamenNozniceApapirus
             mamtitul = false;
             sestsestsest = false;
             ctiristadvacet = false;
-            doublecost = 65;
-            procentocost = 25;
-            titulcost = 50;
+            
             
         }
         public void ResetSkore()

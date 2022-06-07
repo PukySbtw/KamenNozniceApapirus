@@ -120,11 +120,11 @@ while (true)
                 Console.WriteLine("Prohrál si :(");
                 #region ukazatelskore
                 AnsiConsole.Write(new BarChart()
-        .Width(60)
-        .Label("[green bold underline]Herní skóre[/]")
-        .CenterLabel()
-        .AddItem("Tvoje skóre", idk.TvojeScore, Color.Blue)
-        .AddItem("Enemy skóre", idk.EnemyScore, Color.Red));
+                .Width(60)
+                .Label("[green bold underline]Herní skóre[/]")
+                .CenterLabel()
+                .AddItem("Tvoje skóre", idk.TvojeScore, Color.Blue)
+                .AddItem("Enemy skóre", idk.EnemyScore, Color.Red));
                 #endregion ukazatelskore
                 break;
 
@@ -168,7 +168,10 @@ while (true)
         Console.WriteLine("--------------------");
         if (idk.mamtitul == true)
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor= ConsoleColor.DarkMagenta;
             Console.WriteLine("Vlastníš vzácný titul");
+            Console.ResetColor();
         }
         string hrac = Console.ReadLine();
         Console.Clear();
@@ -346,7 +349,7 @@ Loop:
 
                 }
             });
-        Thread.Sleep(1000);
+        Thread.Sleep(10000);
         Console.Clear();
 
 
@@ -386,7 +389,7 @@ Loop:
                 .AddChoices(new[] {
             "Ano", "ne"
                 }));
-            if (Titulbuy == "Ano" && idk.celkoveTvojeScore >= 50)
+            if (Titulbuy == "Ano" && idk.celkoveTvojeScore >= 50 || idk.mamtitul == false)
             {
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 50;
                 Console.WriteLine("Nyní jste si koupil TITUL. Napište prosím své jméno:");
@@ -395,10 +398,10 @@ Loop:
                 idk.mamtitul = true;
 
             }
-            else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.celkoveTvojeScore < 50)
+            else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.celkoveTvojeScore < 50 || idk.mamtitul == true)
             {
                 Console.Clear();
-                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi tohoto TITULU... (Po chvilce vás to hodí zpět do obchodu)");
+                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi tohoto TITULU, nebo TITUL již vlastníš... (Po chvilce vás to hodí zpět do obchodu)");
                 Thread.Sleep(5000);
                 Console.Clear();
                 goto nemamlove;
@@ -426,16 +429,16 @@ Loop:
                     .AddChoices(new[] {
             "Ano", "ne"
                     }));
-            if (DblScr == "Ano" && idk.celkoveTvojeScore >= 65)
+            if (DblScr == "Ano" && idk.celkoveTvojeScore >= 65 || idk.doubleskore == false)
             {
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 65;
                 Console.WriteLine("Zakoupil jste si Double score!");
                 idk.doubleskore = true;
             }
-            else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 || idk.celkoveTvojeScore < 65)
+            else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 || idk.celkoveTvojeScore < 65 || idk.doubleskore == true)
             {
                 Console.Clear();
-                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi Double score!... (Po chvilce vás to hodí zpět do obchodu)");
+                Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi Double score, nebo máte double score již zakoupeno... (Po chvilce vás to hodí zpět do obchodu)");
                 Thread.Sleep(5000);
                 Console.Clear();
                 goto nemamlove2;
@@ -469,5 +472,6 @@ Loop:
             Environment.Exit(1);
         }
     }
+    idk.ResetSkore();
 }
 #endregion shopmenu

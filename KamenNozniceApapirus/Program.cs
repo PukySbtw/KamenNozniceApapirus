@@ -727,8 +727,8 @@ backrock:
             Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
             Console.ResetColor();
             Console.WriteLine("------------------------------------------");
-            Console.WriteLine("Napište code:");
-            int code = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Napište číselný code:");
+             int code = Convert.ToInt32(Console.ReadLine());
             if (code == 666 && idk.sestsestsest == false)
             {
                 idk.celkoveTvojeScore += 666;

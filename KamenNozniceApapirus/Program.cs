@@ -395,9 +395,101 @@ backrock:
           .AddChoices(new[] {
             "Golden rock","Golden paper","Golden scissors", "Inventory","zpět do menu"
           }));
+        if (skinsanswer == "zpět do menu")
+        {
+            Console.Clear();
+            goto dvacet;
+        }
+
+        if (skinsanswer == "Inventory")
+        {
+            Console.Clear();
+            var inventoryanswer = AnsiConsole.Prompt(
+    new SelectionPrompt<string>()
+        .Title("[green]Vyber z možností (na jaký předmět chcete vidět svůj skin)[/]")
+        .PageSize(25)
+        .AddChoices(new[] {
+            "Skin Kámen","Skin Nůžky", "Skin Papír", "zpět do menu"
+
+       }));
+            if (inventoryanswer == "zpět do menu")
+            {
+                Console.Clear();
+                goto backrock;
+            }
+            if (inventoryanswer == "Skin Kámen" && idk.rockG == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Váš skin na kámen vypadatá takto:");
+                var image = new CanvasImage("obrazky/7n8mk8_large.png");
 
 
+                image.MaxWidth(24);
 
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+
+            }
+            else if (inventoryanswer == "Skin Kámen" && idk.rockG == false)
+            {
+                Console.Clear();
+                Console.WriteLine("Nevlastníte žádný skin :(");
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (inventoryanswer == "Skin Nůžky" && idk.scissorsG == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Váš skin na nůžky vypadatá takto:");
+                var image = new CanvasImage("obrazky/GoldenScissors.png.png");
+
+
+                image.MaxWidth(16);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (inventoryanswer == "Skin Nůžky" && idk.scissorsG == false)
+            {
+                Console.Clear();
+                Console.WriteLine("Nevlastníte žádný skin :(");
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (inventoryanswer == "Skin Papír" && idk.paperG == true)
+
+            {
+                Console.Clear();
+                Console.WriteLine("Váš skin na papír vypadá takto:");
+                var image = new CanvasImage("obrazky/GoldenPaper.png.jpg");
+
+
+                image.MaxWidth(16);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (inventoryanswer == "Skin Papír" && idk.paperG == false)
+            {
+                Console.Clear();
+                Console.WriteLine("Nevlastníte žádný skin :(");
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+          
+        }
         if (skinsanswer == "Golden scissors")
         {
             Console.Clear();

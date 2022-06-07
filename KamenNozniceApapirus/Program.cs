@@ -115,11 +115,12 @@ while (true)
             ctx.Spinner(Spinner.Known.Star);
             ctx.SpinnerStyle(Style.Parse("green"));
 
+            Thread.Sleep(3000);
+            
 
             AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
             Thread.Sleep(2000);
         });
-        Thread.Sleep(3000);
         var table = new Table().Centered();
         AnsiConsole.Live(table)
             .Start(ctx =>
@@ -133,6 +134,7 @@ while (true)
                 Thread.Sleep(1200);
 
             });
+        Thread.Sleep(3000);
         Console.Clear();
         Environment.Exit(1);
     }
@@ -432,7 +434,7 @@ backrock:
                 Console.Clear();
                 goto backrock;
             }
-            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 && idk.scissorsG == true || idk.celkoveTvojeScore < 200 && idk.scissorsG == true)
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 || idk.scissorsG == true || idk.celkoveTvojeScore < 200 )
             {
                 Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
                 if (idk.scissorsG == true)
@@ -489,7 +491,7 @@ backrock:
                 Console.Clear();
                 goto backrock;
             }
-            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 && idk.paperG == true ||  idk.celkoveTvojeScore < 200 && idk.paperG == true)
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 || idk.paperG == true ||  idk.celkoveTvojeScore < 200 )
             {
                 Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
                 if (idk.paperG == true)
@@ -546,7 +548,7 @@ backrock:
                 Console.Clear();
                 goto backrock;
             }
-            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 && idk.rockG == true || idk.celkoveTvojeScore  < 200 && idk.rockG == true)
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 || idk.rockG == true || idk.celkoveTvojeScore  < 200)
             {
                 Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
                 if (idk.rockG == true)
@@ -596,24 +598,28 @@ backrock:
            ctx.Spinner(Spinner.Known.Star);
            ctx.SpinnerStyle(Style.Parse("green"));
 
+           Thread.Sleep(3000);
+           
+           
 
            AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
            Thread.Sleep(2000);
        });
-        Thread.Sleep(3000);
         var table = new Table().Centered();
         AnsiConsole.Live(table)
-            .Start(ctx =>
-            {
-                table.AddColumn("MADE BY:");
-                ctx.Refresh();
-                Thread.Sleep(1000);
+                  .Start(ctx =>
+                  {
+                      table.AddColumn("MADE BY:");
+                      ctx.Refresh();
+                      Thread.Sleep(1000);
 
-                table.AddColumn("Lukáš Punt :)");
-                ctx.Refresh();
-                Thread.Sleep(1200);
+                      table.AddColumn("Lukáš Punt :)");
+                      ctx.Refresh();
+                      Thread.Sleep(1200);
 
-            });
+                      
+                  });
+        Thread.Sleep(3000);
         Console.Clear();
         Environment.Exit(1);
     }
@@ -769,7 +775,7 @@ backrock:
                 goto titulbuy;
 
             }
-            else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 && idk.mamtitul == true || idk.celkoveTvojeScore < 50 && idk.mamtitul == true)
+            else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.mamtitul == true || idk.celkoveTvojeScore < 50)
             {
                 Console.Clear();
                 Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi tohoto TITULU, nebo TITUL již vlastníš...");
@@ -825,7 +831,7 @@ backrock:
                 Console.Clear();
                 goto dblyes;
             }
-            else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 && idk.doubleskore == true || idk.celkoveTvojeScore < 65 && idk.doubleskore == true)
+            else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 || idk.doubleskore == true || idk.celkoveTvojeScore < 65)
             {
                 Console.Clear();
                 Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi Double score, nebo máte double score již zakoupeno...");

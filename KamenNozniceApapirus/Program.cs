@@ -77,7 +77,7 @@ var rule2 = new Rule("[red]Pravidla[/]");
 rule2.Style = Style.Parse("grey dim");
 AnsiConsole.Write(rule2);
 
-Console.WriteLine("Pro vstup do arény stiskněte jakékoliv tlačítko");
+Console.WriteLine("Pro vstup do Hry (Main Menu) stiskněte jakékoliv tlačítko");
 Console.ReadKey();
 
 
@@ -99,7 +99,6 @@ while (true)
     {
 
         idk.playAgain = true;
-
 
     }
     if (odpoved == "EXIT")
@@ -176,7 +175,6 @@ while (true)
                 break;
 
             }
-
 
         }
         Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -487,11 +485,11 @@ dvacet:
             .Title("[green][/]")
             .PageSize(25)
             .AddChoices(new[] {
-            "Perk Procenta","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír","Double score", "zpět do menu"
+            "Perk Procenta - cost: 25 coins","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins","Double score - cost: 65 coins", "zpět do menu"
 
             }));
  
-        if (odpoved3 == "Perk Procenta")
+        if (odpoved3 == "Perk Procenta - cost: 25 coins")
         {
             Console.Clear();
             Console.WriteLine("Perk coming soon :)");
@@ -499,7 +497,7 @@ dvacet:
             Console.Clear();
             goto backtoshop;
         }
-        if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír")
+        if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins")
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -519,8 +517,7 @@ dvacet:
                 }));
             if (Titulbuy == "Ano" && idk.celkoveTvojeScore >= 50 && idk.mamtitul == false)
             {
-             
-
+            
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 50;
                 Console.WriteLine("Nyní jste si koupil TITUL. Napište prosím své jméno:");
                 string uzivateljmeno = Console.ReadLine();
@@ -555,8 +552,7 @@ dvacet:
             goto Loop;
         }
       
-   
-        if (odpoved3 == "Double score")
+        if (odpoved3 == "Double score - cost: 65 coins")
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -602,14 +598,9 @@ dvacet:
                 Console.Clear();
                 goto backtoshop2;
             }
-            
         }
         #endregion shopbeta.
-        
-        
-
     }
-   
     idk.ResetSkore();
 }
 #endregion shopmenu

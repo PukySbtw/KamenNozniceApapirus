@@ -341,6 +341,29 @@ dvacet:
         continue;
     }
     #endregion restart
+    if (odpoved2 == "EXIT")
+    {
+        AnsiConsole.Status()
+       .Start("Processing...", ctx =>
+       {
+
+           AnsiConsole.MarkupLine("loading answer...");
+           Thread.Sleep(3000);
+
+
+           ctx.Status("...");
+           ctx.Spinner(Spinner.Known.Star);
+           ctx.SpinnerStyle(Style.Parse("green"));
+
+
+           AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
+           Thread.Sleep(2000);
+       });
+        Thread.Sleep(3000);
+        Console.Clear();
+        Environment.Exit(1);
+    }
+
     if (odpoved2 == "Reedem code")
     {
         Console.Clear();
@@ -443,6 +466,14 @@ dvacet:
 
             }));
  
+        if (odpoved3 == "Perk Procenta")
+        {
+            Console.Clear();
+            Console.WriteLine("Perk coming soon :)");
+            Thread.Sleep(2500);
+            Console.Clear();
+            goto backtoshop;
+        }
         if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír")
         {
             Console.Clear();
@@ -549,33 +580,11 @@ dvacet:
             
         }
         #endregion shopbeta.
-        #region exitshop
-        if (odpoved2 == "EXIT")
-        {
-            AnsiConsole.Status()
-           .Start("Processing...", ctx =>
-           {
-
-               AnsiConsole.MarkupLine("loading answer...");
-               Thread.Sleep(3000);
-
-
-               ctx.Status("...");
-               ctx.Spinner(Spinner.Known.Star);
-               ctx.SpinnerStyle(Style.Parse("green"));
-
-
-               AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
-               Thread.Sleep(2000);
-           });
-            Thread.Sleep(3000);
-            Console.Clear();
-            Environment.Exit(1);
-        }
-
+        
+        
 
     }
-    #endregion exitshop
+   
     idk.ResetSkore();
 }
 #endregion shopmenu

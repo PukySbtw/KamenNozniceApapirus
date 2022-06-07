@@ -55,9 +55,32 @@ Console.Clear();
 #endregion diffOptionMenu
 
 #region info
+var rule3 = new Rule("[yellow]Coins[/]");
+rule3.Style = Style.Parse("green dim");
+
+AnsiConsole.Write(rule3);
 Console.WriteLine("Menší info na začátek: Tvoje skóre v této hře se ti po výhře sčítá a automaticky převádí do měny (coins).");
-Console.WriteLine("Hra se sa chvíli spustí. Užívej :)");
-Thread.Sleep(150);
+var rule4 = new Rule("[yellow]Coins[/]");
+rule4.RuleStyle("green dim");
+
+AnsiConsole.Write(rule4);
+
+var rule = new Rule("[red]Pravidla[/]");
+rule.Style = Style.Parse("grey dim");
+AnsiConsole.Write(rule);
+Console.WriteLine("Máte za úkol porazit soupeře ve hře kámen,nůžky, papír.");
+Console.WriteLine("Kámen rozbije nůžky");
+Console.WriteLine("Nužky přestřihnou papír");
+Console.WriteLine("Papír zabalí kámen");
+Console.WriteLine("Získejte 5 skóre dřív než váš soupeř");
+var rule2 = new Rule("[red]Pravidla[/]");
+rule2.Style = Style.Parse("grey dim");
+AnsiConsole.Write(rule2);
+
+Console.WriteLine("Pro vstup do arény stiskněte jakékoliv tlačítko");
+Console.ReadKey();
+
+
 #endregion info
 
 Console.Clear();
@@ -102,7 +125,7 @@ while (true)
         Environment.Exit(1);
     }
     #endregion MainMenu
-
+   
     Console.Clear();
 
     #region cykly
@@ -313,6 +336,8 @@ while (true)
             Thread.Sleep(1200);
 
         });
+    Console.WriteLine("Stiskněte jakoukoliv klávesu pro SHOP menu!");
+    Console.ReadKey();
     #endregion credit
 
     Console.Clear();

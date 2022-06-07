@@ -17,6 +17,7 @@ namespace KamenNozniceApapirus
         public bool doubleskore { get; set; }
         public void lol()
         {
+            celkoveTvojeScore = 200;
             doubleskore = false;
             mamtitul = false;
             //TvojeScore = 0;

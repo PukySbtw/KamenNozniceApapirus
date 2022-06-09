@@ -3,6 +3,8 @@ global using Spectre.Console;
 #region generators
 Random generator = new Random();
 Score idk = new Score();
+Volba kk = new Volba();
+kk.boost();
 idk.lol();
 #endregion generators
 
@@ -852,24 +854,24 @@ new SelectionPrompt<string>()
 
         if (odpoved2 == "SHOP (beta)")
         {
-            await AnsiConsole.Progress()
-                .StartAsync(async ctx =>
-                {
+            //await AnsiConsole.Progress()
+            //    .StartAsync(async ctx =>
+            //    {
 
-                    var task1 = ctx.AddTask("[green]Načítání obchodu[/]");
-
-
-                    while (!ctx.IsFinished)
-                    {
-
-                        await Task.Delay(75);
+            //        var task1 = ctx.AddTask("[green]Načítání obchodu[/]");
 
 
-                        task1.Increment(1.5);
+            //        while (!ctx.IsFinished)
+            //        {
 
-                    }
-                });
-            Thread.Sleep(750);
+            //            await Task.Delay(75);
+
+
+            //            task1.Increment(1.5);
+
+            //        }
+            //    });
+            //Thread.Sleep(750);
             Console.Clear();
         nemamlove:
         backtoshop:
@@ -890,17 +892,61 @@ new SelectionPrompt<string>()
                 .Title("[green][/]")
                 .PageSize(25)
                 .AddChoices(new[] {
-            "Perk Procenta - cost: 25 coins","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins","Double score - cost: 65 coins", "zpět do menu"
+            "Perk Procenta - cost: 250 coins","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins","Double score - cost: 65 coins", "zpět do menu"
 
                 }));
             #region procenta
-            if (odpoved3 == "Perk Procenta - cost: 25 coins")
+            if (odpoved3 == "Perk Procenta - cost: 250 coins")
+            {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+
+            Console.WriteLine("Tento park vám ukazuje kolik % šance dá enemy. ");
+            Console.WriteLine("Titul stojí 250 coins!");
+            var PerkBuy = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[green]Chcete si koupit perk ?[/]")
+                .PageSize(25)
+                .AddChoices(new[] {
+            "Ano", "ne"
+           
+                }));
+            if (PerkBuy == "Ano" && kk.KoupenyBoost == false && idk.celkoveTvojeScore == 250 || idk.celkoveTvojeScore >= 250)
             {
                 Console.Clear();
-                Console.WriteLine("Perk coming soon :)");
-                Thread.Sleep(2500);
+                kk.KoupenyBoost = true;
+                idk.celkoveTvojeScore = idk.celkoveTvojeScore - 250;
+                Console.WriteLine("Perk zakoupen :)");
+                //int cisloNastroje = Convert.ToInt32(Console.ReadLine());
+                //if (cisloNastroje >= 1 && cisloNastroje <= 3)
+                //{
+                //    Volba volba = new Volba();
+                //    int volbaNepritele = volba.GenerovaniVolby();
+                //    Console.WriteLine(volbaNepritele);
+                //}
+                Thread.Sleep(4000);
+                goto backtoshop;
+
+
+            }
+            else if (PerkBuy == "Ano" && kk.KoupenyBoost == true || idk.celkoveTvojeScore != 250 || idk.celkoveTvojeScore <= 250)
+            {
+                Console.Clear();
+                Console.WriteLine("Nemáte dostatek coins na koupení Perku Procento, nebo Perk Procento již vlastníte :)");
+                Thread.Sleep(5000);
                 Console.Clear();
                 goto backtoshop;
+            }
+            if (PerkBuy == "ne")
+            {
+                Console.Clear();
+                goto backtoshop;
+            }
+                
             }
             #endregion procenta
             #region titul

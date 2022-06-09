@@ -21,8 +21,11 @@ namespace KamenNozniceApapirus
         public bool rockG { get; set; }
         public bool paperG { get; set; }
         public bool scissorsG { get; set; }
+        public bool jgdiff { get; set; }
+        public bool gergelos { get; set; }
         public void lol()
         {
+            gergelos = false;
             scissorsG = false;
             paperG = false;
             rockG = false;
@@ -31,6 +34,7 @@ namespace KamenNozniceApapirus
             mamtitul = false;
             sestsestsest = false;
             ctiristadvacet = false;
+            jgdiff = false;
             
             
         }

@@ -721,6 +721,16 @@ backrock:
     #region codes
     if (odpoved2 == "Reedem code")
         {
+        Console.Clear();
+        var codesanswer = AnsiConsole.Prompt(
+new SelectionPrompt<string>()
+    .Title("[green]Vyber z možností:[/]")
+    .PageSize(25)
+    .AddChoices(new[] {
+            "TEXT", "čísla"
+             }));
+        if (codesanswer == "čísla")
+        {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.White;
@@ -728,7 +738,7 @@ backrock:
             Console.ResetColor();
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("Napište číselný code:");
-             int code = Convert.ToInt32(Console.ReadLine());
+            int code = Convert.ToInt32(Console.ReadLine());
             if (code == 666 && idk.sestsestsest == false)
             {
                 idk.celkoveTvojeScore += 666;
@@ -776,6 +786,66 @@ backrock:
                 goto dvacet;
             }
         }
+        if (codesanswer == "TEXT")
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Napište textový code:");
+            string code1 = Console.ReadLine();
+            if (code1 == "jg diff"&& idk.jgdiff == false)
+            {
+                idk.celkoveTvojeScore += 1000;
+                idk.jgdiff = true;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 1000 coins a máte {idk.celkoveTvojeScore} :)");
+                Console.ResetColor();
+                Thread.Sleep(2666);
+                Console.Clear();
+                goto dvacet;
+            }
+            else if (code1 == "jg diff" && idk.jgdiff == true)
+            {
+                Console.WriteLine("Code byl již využit :)");
+                Thread.Sleep(2666);
+                Console.Clear();
+                goto sesthotovo;
+            }
+
+            if (code1 == "Gergelos je nej streamer" && idk.gergelos == false)
+            {
+                idk.celkoveTvojeScore += 10000;
+                idk.ctiristadvacet = true;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 10 000 coins a máte {idk.celkoveTvojeScore} (a taky máte pravdu ) :)");
+                Console.ResetColor();
+                Thread.Sleep(2420);
+                Console.Clear();
+                goto dvacet;
+            }
+            else if (code1 == "Gergelos je mej streamer" && idk.gergelos == true)
+            {
+                Console.WriteLine("Code byl již využit :)");
+                Thread.Sleep(2420);
+                Console.Clear();
+                goto dvacet;
+
+            }
+            if (code1 != "jg diff"|| code1 != "Gergelos je nej streamer")
+            {
+                Console.Clear();
+                Console.WriteLine("Byl zadán špatný kód!");
+                Thread.Sleep(2500);
+                Console.Clear();
+                goto dvacet;
+            }
+        }
+    }
+  
+       
         #endregion code
 
         #region shopbeta.

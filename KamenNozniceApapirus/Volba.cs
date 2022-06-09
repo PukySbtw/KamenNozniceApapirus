@@ -9,6 +9,11 @@ namespace KamenNozniceApapirus
     internal class Volba
     {
         Random generator = new Random();
+            public bool KoupenyBoost = true;
+        public void boost()
+        {
+            KoupenyBoost = false;
+        }
         public int GenerovaniVolby()
         {
             //generuje volbu mezi 50-25-25 (4) / 40-20-40 (5)

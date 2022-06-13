@@ -821,7 +821,7 @@ new SelectionPrompt<string>()
                 idk.celkoveTvojeScore -= 1;
                 idk.sus = true;
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine($"si docela SUS takže -1 coins 8( tvoje coins: {idk.celkoveTvojeScore} 8)");
+                Console.WriteLine($"si docela SUS takže -1 coins 8/ tvoje coins: {idk.celkoveTvojeScore}");
                 Console.ResetColor();
             ;
                

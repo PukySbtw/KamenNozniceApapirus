@@ -9,6 +9,7 @@ namespace KamenNozniceApapirus
 {
     internal class Score
     {
+        public bool sus { get; set; }
         public int TvojeScore { get; set; }
         public int celkoveTvojeScore { get; set; }
         public int EnemyScore { get; set; }
@@ -25,6 +26,7 @@ namespace KamenNozniceApapirus
         public bool gergelos { get; set; }
         public void lol()
         {
+            sus = false;
             gergelos = false;
             scissorsG = false;
             paperG = false;

@@ -749,53 +749,62 @@ new SelectionPrompt<string>()
             Console.ResetColor();
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("Napište číselný code:");
-            int code = Convert.ToInt32(Console.ReadLine());
-            if (code == 666 && idk.sestsestsest == false)
+            try
             {
-                idk.celkoveTvojeScore += 666;
-                idk.sestsestsest = true;
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 666 coins a máte {idk.celkoveTvojeScore} :)");
-                Console.ResetColor();
-                Thread.Sleep(2666);
-                Console.Clear();
-                goto sesthotovo;
-            }
-            else if (code == 666 && idk.sestsestsest == true)
-            {
-                Console.WriteLine("Code byl již využit :)");
-                Thread.Sleep(2666);
-                Console.Clear();
-                goto sesthotovo;
-            }
+                int code = Convert.ToInt32(Console.ReadLine());
+                if (code == 666 && idk.sestsestsest == false)
+                {
+                    idk.celkoveTvojeScore += 666;
+                    idk.sestsestsest = true;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 666 coins a máte {idk.celkoveTvojeScore} :)");
+                    Console.ResetColor();
+                    Thread.Sleep(2666);
+                    Console.Clear();
+                    goto sesthotovo;
+                }
+                else if (code == 666 && idk.sestsestsest == true)
+                {
+                    Console.WriteLine("Code byl již využit :)");
+                    Thread.Sleep(2666);
+                    Console.Clear();
+                    goto sesthotovo;
+                }
 
-            if (code == 420 && idk.ctiristadvacet == false)
-            {
-                idk.celkoveTvojeScore += 420;
-                idk.ctiristadvacet = true;
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 420 coins a máte {idk.celkoveTvojeScore} :)");
-                Console.ResetColor();
-                Thread.Sleep(2420);
-                Console.Clear();
-                goto dvacet;
-            }
-            else if (code == 420 && idk.ctiristadvacet == true)
-            {
-                Console.WriteLine("Code byl již využit :)");
-                Thread.Sleep(2420);
-                Console.Clear();
-                goto dvacet;
+                if (code == 420 && idk.ctiristadvacet == false)
+                {
+                    idk.celkoveTvojeScore += 420;
+                    idk.ctiristadvacet = true;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 420 coins a máte {idk.celkoveTvojeScore} :)");
+                    Console.ResetColor();
+                    Thread.Sleep(2420);
+                    Console.Clear();
+                    goto dvacet;
+                }
+                else if (code == 420 && idk.ctiristadvacet == true)
+                {
+                    Console.WriteLine("Code byl již využit :)");
+                    Thread.Sleep(2420);
+                    Console.Clear();
+                    goto dvacet;
 
+                }
+                if (code != 666 || code != 420)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Byl zadán špatný kód!");
+                    Thread.Sleep(2500);
+                    Console.Clear();
+                    goto dvacet;
+                }
             }
-            if (code != 666 || code != 420)
-            {
+            catch (Exception ex)
+
+            { Console.WriteLine(ex.Message);
                 Console.Clear();
-                Console.WriteLine("Byl zadán špatný kód!");
-                Thread.Sleep(2500);
-                Console.Clear();
-                goto dvacet;
             }
+            
         }
         if (codesanswer == "TEXT")
         {
@@ -807,6 +816,36 @@ new SelectionPrompt<string>()
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("Napište textový code:");
             string code1 = Console.ReadLine();
+            if (code1 == "SUS" && idk.sus == false)
+            {
+                idk.celkoveTvojeScore -= 1;
+                idk.sus = true;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"si docela SUS takže -1 coins 8( tvoje coins: {idk.celkoveTvojeScore} 8)");
+                Console.ResetColor();
+            ;
+               
+                var image = new CanvasImage("obrazky/Sus.png");
+
+
+                image.MaxWidth(24);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                
+                Console.Clear();
+                goto dvacet;
+            }
+            else if (code1 == "SUS" && idk.sus == true)
+            {
+                Console.WriteLine("Code byl již využit (SUS) 8)");
+                Thread.Sleep(2666);
+                Console.Clear();
+                goto sesthotovo;
+            }
+
+            
             if (code1 == "jg diff"&& idk.jgdiff == false)
             {
                 idk.celkoveTvojeScore += 1000;
@@ -845,7 +884,7 @@ new SelectionPrompt<string>()
                 goto dvacet;
 
             }
-            if (code1 != "jg diff"|| code1 != "Gergelos je nej streamer")
+            if (code1 != "jg diff"|| code1 != "Gergelos je nej streamer" || code1 != "SUS")
             {
                 Console.Clear();
                 Console.WriteLine("Byl zadán špatný kód!");

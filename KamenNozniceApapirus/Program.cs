@@ -147,8 +147,17 @@ while (true)
     #region cykly
     while (idk.playAgain == true)
     {
-
-        int volba = generator.Next(1, 4);
+        int volbaNastroje;
+        if(kk.KoupenyBoost == true) 
+        {
+            Volba volba = new Volba();
+            volbaNastroje = volba.GenerovaniVolby();
+        }
+        else
+        {
+            volbaNastroje = generator.Next(1, 4);
+        }
+        
         if (idk.TvojeScore == 5 || idk.EnemyScore == 5)
         {
 
@@ -218,11 +227,11 @@ while (true)
             Console.WriteLine("Double score je zapnutý");
             Console.ResetColor();
         }
-        string hrac = Console.ReadLine();
+        string hrac = Console.ReadLine(); //načtení volby hráče
         Console.Clear();
 
 
-        if (volba == 1)
+        if (volbaNastroje == 1)
         {
             if (hrac == "1")
             {
@@ -257,7 +266,7 @@ while (true)
 
         }
 
-        else if (volba == 2)
+        else if (volbaNastroje == 2)
         {
             if (hrac == "1")
             {
@@ -292,7 +301,7 @@ while (true)
                 Console.WriteLine("musíš si vybrat kámen, nůžky nebo papír!");
             }
         }
-        else if (volba == 3)
+        else if (volbaNastroje == 3)
         {
             if (hrac == "1")
             {
@@ -816,7 +825,7 @@ new SelectionPrompt<string>()
                 Console.Clear();
                 goto sesthotovo;
             }
-
+            
             if (code1 == "Gergelos je nej streamer" && idk.gergelos == false)
             {
                 idk.celkoveTvojeScore += 10000;
@@ -921,17 +930,8 @@ new SelectionPrompt<string>()
                 kk.KoupenyBoost = true;
                 idk.celkoveTvojeScore = idk.celkoveTvojeScore - 250;
                 Console.WriteLine("Perk zakoupen :)");
-                //int cisloNastroje = Convert.ToInt32(Console.ReadLine());
-                //if (cisloNastroje >= 1 && cisloNastroje <= 3)
-                //{
-                //    Volba volba = new Volba();
-                //    int volbaNepritele = volba.GenerovaniVolby();
-                //    Console.WriteLine(volbaNepritele);
-                //}
                 Thread.Sleep(4000);
                 goto backtoshop;
-
-
             }
             else if (PerkBuy == "Ano" && kk.KoupenyBoost == true || idk.celkoveTvojeScore != 250 || idk.celkoveTvojeScore <= 250)
             {

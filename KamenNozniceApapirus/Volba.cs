@@ -9,7 +9,8 @@ namespace KamenNozniceApapirus
     internal class Volba
     {
         Random generator = new Random();
-            public bool KoupenyBoost = true;
+        public bool KoupenyBoost = true;
+        private readonly string[] nastroje = { "Kámen", "Nůžky", "Papír" };
         public void boost()
         {
             KoupenyBoost = false;
@@ -28,9 +29,9 @@ namespace KamenNozniceApapirus
                 sance = 5;
             }
             int[] sanceNaVysledky = PowerupSance(sance); //metoda vrací 25-50-25 nebo 20-40-40
-            foreach (int sanceNaVysledek in sanceNaVysledky)
+            for(int i = 0; i <= sanceNaVysledky.Length-1; i++)
             {
-                Console.WriteLine(sanceNaVysledek + " ");
+                Console.WriteLine(nastroje[i] + ": " + sanceNaVysledky[i] + " ");
             }
             int volbaEnemy = generator.Next(0, 101);
             int zvolenyNastroj = -1;

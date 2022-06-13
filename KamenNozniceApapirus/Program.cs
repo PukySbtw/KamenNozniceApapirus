@@ -828,7 +828,7 @@ new SelectionPrompt<string>()
                 var image = new CanvasImage("obrazky/Sus.png");
 
 
-                image.MaxWidth(24);
+                image.MaxWidth(32);
 
 
                 AnsiConsole.Write(image);

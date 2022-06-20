@@ -1,8 +1,12 @@
 ﻿global using KamenNozniceApapirus;
-using Spectre.Console;
-
+global using Spectre.Console;
+#region generators
 Random generator = new Random();
 Score idk = new Score();
+Volba kk = new Volba();
+kk.boost();
+idk.lol();
+#endregion generators
 
 
 #region title
@@ -23,7 +27,7 @@ AnsiConsole.Status()
 
         AnsiConsole.MarkupLine("Loading...");
         Thread.Sleep(3000);
-
+       
 
         ctx.Status("...");
         ctx.Spinner(Spinner.Known.Star);
@@ -37,6 +41,7 @@ AnsiConsole.Status()
 
 Console.Clear();
 
+#region diffOptionMenu
 //AnsiConsole.Write(
 //    new FigletText("write PLAY ")
 //        .LeftAligned()
@@ -48,225 +53,1052 @@ Console.Clear();
 //        .Color(Color.Yellow));
 //Console.WriteLine("pro ukončení aplikace");
 //Console.WriteLine("---------------------");
-var odpoved = AnsiConsole.Prompt(
-    new SelectionPrompt<string>()
-        .Title("[green]Vyber z možností[/]")
-        .PageSize(25)
-        .AddChoices(new[] {
-            "PLAY", "EXIT"
-        })) ;
-Console.WriteLine("----------------------");
 //string odpoved = Console.ReadLine();
-if (odpoved == "PLAY")
+#endregion diffOptionMenu
+
+#region info
+var rule3 = new Rule("[yellow]Coins[/]");
+rule3.Style = Style.Parse("green dim");
+
+AnsiConsole.Write(rule3);
+Console.WriteLine("Menší info na začátek: Tvoje skóre v této hře se ti po výhře sčítá a automaticky převádí do měny (coins).");
+var rule4 = new Rule("[yellow]Coins[/]");
+rule4.RuleStyle("green dim");
+
+AnsiConsole.Write(rule4);
+
+var rule = new Rule("[red]Pravidla[/]");
+rule.Style = Style.Parse("grey dim");
+AnsiConsole.Write(rule);
+Console.WriteLine("Máte za úkol porazit soupeře ve hře kámen,nůžky, papír.");
+Console.WriteLine("Kámen rozbije nůžky");
+Console.WriteLine("Nužky přestřihnou papír");
+Console.WriteLine("Papír zabalí kámen");
+Console.WriteLine("Získejte 5 skóre dřív než váš soupeř");
+var rule2 = new Rule("[red]Pravidla[/]");
+rule2.Style = Style.Parse("grey dim");
+AnsiConsole.Write(rule2);
+
+Console.WriteLine("Pro vstup do Hry (Main Menu) stiskněte jakékoliv tlačítko");
+Console.ReadKey();
+
+
+#endregion info
+
+Console.Clear();
+while (true)
 {
-    idk.playAgain = true;
-}
-if (odpoved == "EXIT")
-{
-    AnsiConsole.Status()
-    .Start("Processing...", ctx =>
+    #region MainMenu
+    var odpoved = AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title("[green]Vyber z možností[/]")
+            .PageSize(25)
+            .AddChoices(new[] {
+            "PLAY", "EXIT"
+            }));
+
+    if (odpoved == "PLAY")
     {
 
-        AnsiConsole.MarkupLine("loading answer...");
+        idk.playAgain = true;
+
+    }
+    if (odpoved == "EXIT")
+    {
+        AnsiConsole.Status()
+        .Start("Processing...", ctx =>
+        {
+
+            AnsiConsole.MarkupLine("loading answer...");
+            Thread.Sleep(3000);
+
+
+            ctx.Status("...");
+            ctx.Spinner(Spinner.Known.Star);
+            ctx.SpinnerStyle(Style.Parse("green"));
+
+            Thread.Sleep(3000);
+
+
+            AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
+            Thread.Sleep(2000);
+        });
+        var table = new Table().Centered();
+        AnsiConsole.Live(table)
+            .Start(ctx =>
+            {
+                table.AddColumn("MADE BY:");
+                ctx.Refresh();
+                Thread.Sleep(1000);
+
+                table.AddColumn("Lukáš Punt :)");
+                ctx.Refresh();
+                Thread.Sleep(1200);
+
+            });
         Thread.Sleep(3000);
-
-
-        ctx.Status("...");
-        ctx.Spinner(Spinner.Known.Star);
-        ctx.SpinnerStyle(Style.Parse("green"));
-
-
-        AnsiConsole.MarkupLine("NASCHLE PANE");
-        Thread.Sleep(2000);
-    });
-    Thread.Sleep(3000);
-    Console.Clear();
-    Environment.Exit(1);
-}
-
-Console.Clear();
-
-while (idk.playAgain == true)
-{
-
-    int volba = generator.Next(1, 4);
-    if (idk.TvojeScore == 5 || idk.EnemyScore == 5)
-    {
-        if (idk.EnemyScore == 5)
-        {
-            Console.Clear();
-            Console.WriteLine("Prohrál si :(");
-            #region ukazatelskore
-            AnsiConsole.Write(new BarChart()
-    .Width(60)
-    .Label("[green bold underline]Herní skóre[/]")
-    .CenterLabel()
-    .AddItem("Tvoje skóre", idk.TvojeScore, Color.Blue)
-    .AddItem("Enemy skóre", idk.EnemyScore, Color.Red));
-            #endregion ukazatelskore
-            break;
-        }
-        if (idk.TvojeScore == 5)
-        {
-
-            Console.Clear();
-            Console.WriteLine("Vyhrál si! Tvoje score je 5");
-            #region ukazatelskore2
-            AnsiConsole.Write(new BarChart()
-    .Width(60)
-    .Label("[green bold underline]Herní skóre[/]")
-    .CenterLabel()
-    .AddItem("Tvoje skóre", idk.TvojeScore, Color.Blue)
-    .AddItem("Enemy skóre", idk.EnemyScore, Color.Red));
-            #endregion ukazatelskore2
-            break;
-
-        }
+        Console.Clear();
+        Environment.Exit(1);
     }
-    Console.ForegroundColor = ConsoleColor.Blue;
-    Console.WriteLine($"You: {idk.TvojeScore}");
-    Console.ForegroundColor = ConsoleColor.DarkRed;
-    Console.WriteLine($"Enemy: {idk.EnemyScore}");
-    Console.WriteLine("--------------------");
-    Console.WriteLine("Kolo hráče (tebe):");
-    Console.WriteLine("    1 - kámen");
-    Console.WriteLine("    2 - nůžky");
-    Console.WriteLine("    3 - papír");
-    Console.WriteLine("--------------------");
-    string hrac = Console.ReadLine();
+    #endregion MainMenu
+
     Console.Clear();
 
-
-    if (volba == 1)
+    #region cykly
+    while (idk.playAgain == true)
     {
-        if (hrac == "1")
+        int volbaNastroje;
+        if(kk.KoupenyBoost == true) 
         {
-            Console.WriteLine("nepřítel zvolil kámen");
-            Console.WriteLine(" je to remíza ");
-        }
-        else if (hrac == "3")
-        {
-            Console.WriteLine("nepřítel zvolil papír");
-            Console.WriteLine(" je to remíza ");
-
-        }
-        else if (hrac == "2")
-        {
-            Console.WriteLine("nepřítel zvolil nůžky");
-            Console.WriteLine("je to remíza ");
+            Volba volba = new Volba();
+            volbaNastroje = volba.GenerovaniVolby();
         }
         else
         {
-            Console.WriteLine("musíš si vybrat kámen, nůžky nebo papír!");
+            volbaNastroje = generator.Next(1, 4);
+        }
+        
+        if (idk.TvojeScore == 5 || idk.EnemyScore == 5)
+        {
+
+            if (idk.EnemyScore == 5)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Prohrál si :(");
+                #region ukazatelskore
+                AnsiConsole.Write(new BarChart()
+                .Width(60)
+                .Label("[green bold underline]Herní skóre[/]")
+                .CenterLabel()
+                .AddItem("Tvoje skóre", idk.TvojeScore, Color.Blue)
+                .AddItem("Enemy skóre", idk.EnemyScore, Color.Red));
+                #endregion ukazatelskore
+                break;
+
+            }
+            if (idk.TvojeScore == 5)
+            {
+
+                Console.Clear();
+                idk.celkoveTvojeScore += 5;
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Vyhrál si! Tvoje score je 5");
+                #region ukazatelskore2
+                AnsiConsole.Write(new BarChart()
+                .Width(60)
+                .Label("[green bold underline]Herní skóre[/]")
+                .CenterLabel()
+                .AddItem("Tvoje skóre", idk.TvojeScore, Color.Blue)
+                .AddItem("Enemy skóre", idk.EnemyScore, Color.Red));
+                if (idk.doubleskore == true)
+                {
+                    idk.celkoveTvojeScore += 5;
+
+                }
+                #endregion ukazatelskore2
+                break;
+
+            }
 
         }
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
+        Console.WriteLine($"You: {idk.TvojeScore}");
+        Console.ForegroundColor = ConsoleColor.DarkRed;
+        Console.WriteLine($"Enemy: {idk.EnemyScore}");
+        Console.WriteLine("--------------------");
+        Console.WriteLine("Kolo hráče (tebe):");
+        Console.WriteLine("    1 - kámen");
+        Console.WriteLine("    2 - nůžky");
+        Console.WriteLine("    3 - papír");
+        Console.WriteLine("--------------------");
+        if (idk.mamtitul == true)
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("Vlastníš vzácný titul");
+            Console.ResetColor();
+        }
+        if (idk.doubleskore == true)
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("Double score je zapnutý");
+            Console.ResetColor();
+        }
+        string hrac = Console.ReadLine(); //načtení volby hráče
+        Console.Clear();
+
+
+        if (volbaNastroje == 1)
+        {
+            if (hrac == "1")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil kámen:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(" je to remíza ");
+            }
+            else if (hrac == "3")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil papír:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(" je to remíza ");
+
+            }
+            else if (hrac == "2")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil nůžky:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("je to remíza ");
+            }
+            else
+            {
+                Console.WriteLine("musíš si vybrat kámen, nůžky nebo papír!");
+
+            }
+
+        }
+
+        else if (volbaNastroje == 2)
+        {
+            if (hrac == "1")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil papír:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("prohrál si");
+                idk.EnemyScore++;
+            }
+            else if (hrac == "3")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil nůžky:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("prohrál si ");
+                idk.EnemyScore++;
+
+            }
+            else if (hrac == "2")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil kámen:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("prohrál si");
+                idk.EnemyScore++;
+            }
+            else
+            {
+                Console.WriteLine("musíš si vybrat kámen, nůžky nebo papír!");
+            }
+        }
+        else if (volbaNastroje == 3)
+        {
+            if (hrac == "1")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil nůžky:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("vyhrál si!");
+                idk.TvojeScore++;
+
+            }
+            else if (hrac == "3")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil kámen:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("vyhrál si");
+                idk.TvojeScore++;
+            }
+            else if (hrac == "2")
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("nepřítel zvolil papír:");
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("vyhrál si");
+                idk.TvojeScore++;
+            }
+            else
+            {
+                Console.WriteLine("musíš si vybrat kámen, nůžky nebo papír!");
+            }
+        }
+        Console.BackgroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+        Console.ResetColor();
+        Console.WriteLine("------------------------------------------");
+        Console.ResetColor();
 
     }
+    #endregion cykly
 
-    else if (volba == 2)
+    #region credit
+    //var table = new Table().Centered();
+    //AnsiConsole.Live(table)
+    //    .Start(ctx =>
+    //    {
+    //        table.AddColumn("MADE BY:");
+    //        ctx.Refresh();
+    //        Thread.Sleep(1000);
+
+    //        table.AddColumn("Lukáš Punt :)");
+    //        ctx.Refresh();
+    //        Thread.Sleep(1200);
+
+    //    });
+    Console.WriteLine("Stiskněte jakoukoliv klávesu pro SHOP menu!");
+    Console.ReadKey();
+    #endregion credit
+
+    Console.Clear();
+
+#region shopmenu
+
+#region obchodnabidka
+Loop:
+dvacet:
+sesthotovo:
+    Console.BackgroundColor = ConsoleColor.DarkGray;
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+    Console.ResetColor();
+    Console.WriteLine("------------------------------------------");
+    var odpoved2 = AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title("[green]Vyber z možností[/]")
+            .PageSize(25)
+            .AddChoices(new[] {
+            "RESTART","SHOP (beta)","Skins (beta)", "Reedem code","EXIT"
+
+           }));
+#endregion onchodnabidka
+
+#region skins
+backrock:
+    if (odpoved2 == "Skins (beta)")
     {
-        if (hrac == "1")
-        {
-            Console.WriteLine("nepřítel zvolil papír");
-            Console.WriteLine("prohrál si");
-            idk.EnemyScore++;
-        }
-        else if (hrac == "3")
-        {
-            Console.WriteLine("nepřítel zvolil nůžky");
-            Console.WriteLine("prohrál si ");
-            idk.EnemyScore++;
 
-        }
-        else if (hrac == "2")
+        Console.Clear();
+        Console.BackgroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+        Console.ResetColor();
+        Console.WriteLine("------------------------------------------");
+
+        var skinsanswer = AnsiConsole.Prompt(
+      new SelectionPrompt<string>()
+          .Title("[green]GOLDEN VIP SKINS NOW!!![/]")
+          .PageSize(25)
+          .AddChoices(new[] {
+            "Golden rock","Golden paper","Golden scissors", "Inventory","zpět do menu"
+          }));
+        if (skinsanswer == "zpět do menu")
         {
-            Console.WriteLine("nepřítel zvolil kámen");
-            Console.WriteLine("prohrál si");
-            idk.EnemyScore++;
+            Console.Clear();
+            goto dvacet;
         }
-        else
+
+        if (skinsanswer == "Inventory")
         {
-            Console.WriteLine("musíš si vybrat kámen, nůžky nebo papír!");
-        }
-    }
-    else if (volba == 3)
-    {
-        if (hrac == "1")
-        {
-            Console.WriteLine("nepřítel zvolil nůžky");
-            Console.WriteLine("vyhrál si!");
-            idk.TvojeScore++;
-
-        }
-        else if (hrac == "3")
-        {
-            Console.WriteLine("nepřítel zvolil kámen");
-            Console.WriteLine("vyhrál si");
-            idk.TvojeScore++;
-        }
-        else if (hrac == "2")
-        {
-            Console.WriteLine("nepřítel zvolil papír");
-            Console.WriteLine("vyhrál si");
-            idk.TvojeScore++;
-        }
-        else
-        {
-            Console.WriteLine("musíš si vybrat kámen, nůžky nebo papír!");
-
-        }
-    }
-}
-
-var table = new Table().Centered();
-
-AnsiConsole.Live(table)
-    .Start(ctx =>
-    {
-        table.AddColumn("MADE BY:");
-        ctx.Refresh();
-        Thread.Sleep(1000);
-
-        table.AddColumn("Lukáš Punt :)");
-        ctx.Refresh();
-        Thread.Sleep(2000);
-    });
-
-
-Console.Clear();
-var odpoved2 = AnsiConsole.Prompt(
+            Console.Clear();
+            var inventoryanswer = AnsiConsole.Prompt(
     new SelectionPrompt<string>()
-        .Title("[green]Vyber z možností[/]")
+        .Title("[green]Vyber z možností (na jaký předmět chcete vidět svůj skin)[/]")
         .PageSize(25)
         .AddChoices(new[] {
-            "RESTART", "EXIT","SHOP"
-        }));
-Console.WriteLine("----------------------");
-if (odpoved2 == "RESTART")
-{
-    //idk.playAgain = true;
-}
-if (odpoved2 == "SHOP")
-{
+            "Skin Kámen","Skin Nůžky", "Skin Papír", "zpět do menu"
 
-}
-if (odpoved2 == "EXIT")
-{
-    AnsiConsole.Status()
-    .Start("Processing...", ctx =>
+       }));
+            if (inventoryanswer == "zpět do menu")
+            {
+                Console.Clear();
+                goto backrock;
+            }
+            if (inventoryanswer == "Skin Kámen" && idk.rockG == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Váš skin na kámen vypadatá takto:");
+                var image = new CanvasImage("obrazky/7n8mk8_large.png");
+
+
+                image.MaxWidth(24);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+
+            }
+            else if (inventoryanswer == "Skin Kámen" && idk.rockG == false)
+            {
+                Console.Clear();
+                Console.WriteLine("Nevlastníte žádný skin :(");
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (inventoryanswer == "Skin Nůžky" && idk.scissorsG == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Váš skin na nůžky vypadatá takto:");
+                var image = new CanvasImage("obrazky/GoldenScissors.png.png");
+
+
+                image.MaxWidth(16);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (inventoryanswer == "Skin Nůžky" && idk.scissorsG == false)
+            {
+                Console.Clear();
+                Console.WriteLine("Nevlastníte žádný skin :(");
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (inventoryanswer == "Skin Papír" && idk.paperG == true)
+
+            {
+                Console.Clear();
+                Console.WriteLine("Váš skin na papír vypadá takto:");
+                var image = new CanvasImage("obrazky/GoldenPaper.png.jpg");
+
+
+                image.MaxWidth(16);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (inventoryanswer == "Skin Papír" && idk.paperG == false)
+            {
+                Console.Clear();
+                Console.WriteLine("Nevlastníte žádný skin :(");
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+          
+        }
+        if (skinsanswer == "Golden scissors")
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+
+            Console.WriteLine("Tento Skin je jen pro nejlepší nůžko hráče!");
+            Console.WriteLine("Skin stojí 200 coins!");
+            var Rockbuy = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[green]Chcete si koupit Skin ?[/]")
+                .PageSize(25)
+                .AddChoices(new[] {
+            "Ano", "ne"
+                }));
+
+            if (Rockbuy == "Ano" && idk.celkoveTvojeScore >= 200 && idk.scissorsG == false)
+            {
+                idk.celkoveTvojeScore -= 200;
+                idk.scissorsG = true;
+                Console.WriteLine("Zakoupil jste si nůžky a váš scissors skin vypadá takto:");
+                var image = new CanvasImage("obrazky/GoldenScissors.png.png");
+
+
+                image.MaxWidth(16);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 || idk.scissorsG == true || idk.celkoveTvojeScore > 200)
+            {
+                Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
+                if (idk.scissorsG == true)
+                {
+                    Console.BackgroundColor = Color.White;
+                    Console.ForegroundColor = Color.Green;
+                    Console.WriteLine("Skin již vlastníš");
+                    Console.ResetColor();
+                }
+                Thread.Sleep(4000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (Rockbuy == "ne")
+            {
+                Console.Clear();
+                goto backrock;
+            }
+
+
+        }
+        if (skinsanswer == "Golden paper")
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+
+            Console.WriteLine("Tento Skin je jen pro nejlepší papír hráče!");
+            Console.WriteLine("Skin stojí 200 coins!");
+            var Rockbuy = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[green]Chcete si koupit Skin ?[/]")
+                .PageSize(25)
+                .AddChoices(new[] {
+            "Ano", "ne"
+                }));
+
+            if (Rockbuy == "Ano" && idk.celkoveTvojeScore >= 200 && idk.paperG == false)
+            {
+                idk.celkoveTvojeScore -= 200;
+                idk.paperG = true;
+                Console.WriteLine("Zakoupil jste si papír a váš paper skin vypadá takto:");
+
+                var image = new CanvasImage("obrazky/GoldenPaper.png.jpg");
+
+
+                image.MaxWidth(16);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 || idk.paperG == true || idk.celkoveTvojeScore > 200)
+            {
+                Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
+                if (idk.paperG == true)
+                {
+                    Console.BackgroundColor = Color.White;
+                    Console.ForegroundColor = Color.Green;
+                    Console.WriteLine("Skin již vlastníš");
+                    Console.ResetColor();
+                }
+                Thread.Sleep(4000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (Rockbuy == "ne")
+            {
+                Console.Clear();
+                goto backrock;
+            }
+
+
+        }
+        if (skinsanswer == "Golden rock")
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+
+            Console.WriteLine("Tento Skin je jen pro nejlepší kámen hráče!");
+            Console.WriteLine("Skin stojí 200 coins!");
+            var Rockbuy = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[green]Chcete si koupit Skin ?[/]")
+                .PageSize(25)
+                .AddChoices(new[] {
+            "Ano", "ne"
+                }));
+
+            if (Rockbuy == "Ano" && idk.celkoveTvojeScore >= 200 && idk.rockG == false)
+            {
+                idk.celkoveTvojeScore -= 200;
+                idk.rockG = true;
+                Console.WriteLine("Zakoupil jste si kámen a váš rock skin vypadá takto:");
+                var image = new CanvasImage("obrazky/7n8mk8_large.png");
+
+
+                image.MaxWidth(24);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backrock;
+            }
+            else if (Rockbuy == "Ano" && idk.celkoveTvojeScore != 200 || idk.rockG == true || idk.celkoveTvojeScore > 200)
+            {
+                Console.WriteLine("Nemáte dostatek coins na koupi skinu, nebo již skin vlastníš");
+                if (idk.rockG == true)
+                {
+                    Console.BackgroundColor = Color.White;
+                    Console.ForegroundColor = Color.Green;
+                    Console.WriteLine("Skin již vlastníš");
+                    Console.ResetColor();
+                }
+                Thread.Sleep(4000);
+                Console.Clear();
+                goto backrock;
+            }
+            if (Rockbuy == "ne")
+            {
+                Console.Clear();
+                goto backrock;
+            }
+
+
+        }
+
+    }
+    #endregion skins
+
+    #region restart
+    if (odpoved2 == "RESTART")
     {
+        idk.EnemyScore = 0;
+        idk.TvojeScore = 0;
+        continue;
+    }
+    #endregion restart
 
-        AnsiConsole.MarkupLine("loading answer...");
+    #region exit3
+    if (odpoved2 == "EXIT")
+    {
+        AnsiConsole.Status()
+       .Start("Processing...", ctx =>
+       {
+
+           AnsiConsole.MarkupLine("loading answer...");
+           Thread.Sleep(3000);
+
+
+           ctx.Status("...");
+           ctx.Spinner(Spinner.Known.Star);
+           ctx.SpinnerStyle(Style.Parse("green"));
+
+           Thread.Sleep(3000);
+
+
+
+           AnsiConsole.MarkupLine("Stiskněte jakoukoliv klávesu (pro vypnutí aplikace) nebo chvíli vyčkejte");
+           Thread.Sleep(2000);
+       });
+        var table = new Table().Centered();
+        AnsiConsole.Live(table)
+                  .Start(ctx =>
+                  {
+                      table.AddColumn("MADE BY:");
+                      ctx.Refresh();
+                      Thread.Sleep(1000);
+
+                      table.AddColumn("Lukáš Punt :)");
+                      ctx.Refresh();
+                      Thread.Sleep(1200);
+
+
+                  });
         Thread.Sleep(3000);
+        Console.Clear();
+        Environment.Exit(1);
+    }
+    #endregion exit3
 
-        ctx.Status("...");
-        ctx.Spinner(Spinner.Known.Star);
-        ctx.SpinnerStyle(Style.Parse("green"));
 
-        AnsiConsole.MarkupLine("NASCHLE PANE");
-        Thread.Sleep(2000);
-    });
-    Thread.Sleep(3000);
-    //Console.Clear();
-    Environment.Exit(1);
+    #region codes
+    if (odpoved2 == "Reedem code")
+        {
+        Console.Clear();
+        var codesanswer = AnsiConsole.Prompt(
+new SelectionPrompt<string>()
+    .Title("[green]Vyber z možností:[/]")
+    .PageSize(25)
+    .AddChoices(new[] {
+            "TEXT", "čísla"
+             }));
+        if (codesanswer == "čísla")
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Napište číselný code:");
+            try
+            {
+                int code = Convert.ToInt32(Console.ReadLine());
+                if (code == 666 && idk.sestsestsest == false)
+                {
+                    idk.celkoveTvojeScore += 666;
+                    idk.sestsestsest = true;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 666 coins a máte {idk.celkoveTvojeScore} :)");
+                    Console.ResetColor();
+                    Thread.Sleep(2666);
+                    Console.Clear();
+                    goto sesthotovo;
+                }
+                else if (code == 666 && idk.sestsestsest == true)
+                {
+                    Console.WriteLine("Code byl již využit :)");
+                    Thread.Sleep(2666);
+                    Console.Clear();
+                    goto sesthotovo;
+                }
+
+                if (code == 420 && idk.ctiristadvacet == false)
+                {
+                    idk.celkoveTvojeScore += 420;
+                    idk.ctiristadvacet = true;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 420 coins a máte {idk.celkoveTvojeScore} :)");
+                    Console.ResetColor();
+                    Thread.Sleep(2420);
+                    Console.Clear();
+                    goto dvacet;
+                }
+                else if (code == 420 && idk.ctiristadvacet == true)
+                {
+                    Console.WriteLine("Code byl již využit :)");
+                    Thread.Sleep(2420);
+                    Console.Clear();
+                    goto dvacet;
+
+                }
+                if (code != 666 || code != 420)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Byl zadán špatný kód!");
+                    Thread.Sleep(2500);
+                    Console.Clear();
+                    goto dvacet;
+                }
+            }
+            catch (Exception ex)
+
+            { Console.WriteLine(ex.Message);
+                Console.Clear();
+            }
+            
+        }
+        if (codesanswer == "TEXT")
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("Napište textový code:");
+            string code1 = Console.ReadLine();
+            if (code1 == "SUS" && idk.sus == false)
+            {
+                idk.celkoveTvojeScore -= 1;
+                idk.sus = true;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"si docela SUS takže -1 coins 8/ tvoje coins: {idk.celkoveTvojeScore}");
+                Console.ResetColor();
+            ;
+               
+                var image = new CanvasImage("obrazky/Sus.png");
+
+
+                image.MaxWidth(32);
+
+
+                AnsiConsole.Write(image);
+                Thread.Sleep(5000);
+                
+                Console.Clear();
+                goto dvacet;
+            }
+            else if (code1 == "SUS" && idk.sus == true)
+            {
+                Console.WriteLine("Code byl již využit (SUS) 8)");
+                Thread.Sleep(2666);
+                Console.Clear();
+                goto sesthotovo;
+            }
+
+            
+            if (code1 == "jg diff"&& idk.jgdiff == false)
+            {
+                idk.celkoveTvojeScore += 1000;
+                idk.jgdiff = true;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 1000 coins a máte {idk.celkoveTvojeScore} :)");
+                Console.ResetColor();
+                Thread.Sleep(2666);
+                Console.Clear();
+                goto dvacet;
+            }
+            else if (code1 == "jg diff" && idk.jgdiff == true)
+            {
+                Console.WriteLine("Code byl již využit :)");
+                Thread.Sleep(2666);
+                Console.Clear();
+                goto sesthotovo;
+            }
+            
+            if (code1 == "Gergelos je nej streamer" && idk.gergelos == false)
+            {
+                idk.celkoveTvojeScore += 10000;
+                idk.ctiristadvacet = true;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 10 000 coins a máte {idk.celkoveTvojeScore} (a taky máte pravdu ) :)");
+                Console.ResetColor();
+                Thread.Sleep(2420);
+                Console.Clear();
+                goto dvacet;
+            }
+            else if (code1 == "Gergelos je mej streamer" && idk.gergelos == true)
+            {
+                Console.WriteLine("Code byl již využit :)");
+                Thread.Sleep(2420);
+                Console.Clear();
+                goto dvacet;
+
+            }
+            if (code1 != "jg diff"|| code1 != "Gergelos je nej streamer" || code1 != "SUS")
+            {
+                Console.Clear();
+                Console.WriteLine("Byl zadán špatný kód!");
+                Thread.Sleep(2500);
+                Console.Clear();
+                goto dvacet;
+            }
+        }
+    }
+  
+       
+        #endregion code
+
+        #region shopbeta.
+
+        if (odpoved2 == "SHOP (beta)")
+        {
+            //await AnsiConsole.Progress()
+            //    .StartAsync(async ctx =>
+            //    {
+
+            //        var task1 = ctx.AddTask("[green]Načítání obchodu[/]");
+
+
+            //        while (!ctx.IsFinished)
+            //        {
+
+            //            await Task.Delay(75);
+
+
+            //            task1.Increment(1.5);
+
+            //        }
+            //    });
+            //Thread.Sleep(750);
+            Console.Clear();
+        nemamlove:
+        backtoshop:
+        nemamlove2:
+        backtoshop2:
+        dblyes:
+        titulbuy:
+
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+
+            Console.WriteLine("Prodavač: Výtejte v obchodě, co si přejete ?");
+            var odpoved3 = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[green][/]")
+                .PageSize(25)
+                .AddChoices(new[] {
+            "Perk Procenta - cost: 250 coins","TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins","Double score - cost: 65 coins", "zpět do menu"
+
+                }));
+            #region procenta
+            if (odpoved3 == "Perk Procenta - cost: 250 coins")
+            {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+            Console.ResetColor();
+            Console.WriteLine("------------------------------------------");
+
+            Console.WriteLine("Tento park vám ukazuje kolik % šance dá enemy. ");
+            Console.WriteLine("Titul stojí 250 coins!");
+            var PerkBuy = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[green]Chcete si koupit perk ?[/]")
+                .PageSize(25)
+                .AddChoices(new[] {
+            "Ano", "ne"
+           
+                }));
+            if (PerkBuy == "Ano" && kk.KoupenyBoost == false && idk.celkoveTvojeScore == 250 || idk.celkoveTvojeScore >= 250)
+            {
+                Console.Clear();
+                kk.KoupenyBoost = true;
+                idk.celkoveTvojeScore = idk.celkoveTvojeScore - 250;
+                Console.WriteLine("Perk zakoupen :)");
+                Thread.Sleep(4000);
+                goto backtoshop;
+            }
+            else if (PerkBuy == "Ano" && kk.KoupenyBoost == true || idk.celkoveTvojeScore != 250 || idk.celkoveTvojeScore <= 250)
+            {
+                Console.Clear();
+                Console.WriteLine("Nemáte dostatek coins na koupení Perku Procento, nebo Perk Procento již vlastníte :)");
+                Thread.Sleep(5000);
+                Console.Clear();
+                goto backtoshop;
+            }
+            if (PerkBuy == "ne")
+            {
+                Console.Clear();
+                goto backtoshop;
+            }
+                
+            }
+            #endregion procenta
+            #region titul
+            if (odpoved3 == "TITUL: Nejostřejší nůžky, nejtvrdší kámen a nejrovnější papír - cost: 50 coins")
+            {
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+                Console.ResetColor();
+                Console.WriteLine("------------------------------------------");
+
+                Console.WriteLine("Tento titul si zaslouží jenom ten nejtvrdší z kameňáků, neostřejší z nožnic a najrovnější z papírů !");
+                Console.WriteLine("Titul stojí 50 coins!");
+                var Titulbuy = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[green]Chcete si koupit Titul ?[/]")
+                    .PageSize(25)
+                    .AddChoices(new[] {
+            "Ano", "ne"
+                    }));
+                if (Titulbuy == "Ano" && idk.celkoveTvojeScore >= 50 && idk.mamtitul == false)
+                {
+
+                    idk.celkoveTvojeScore = idk.celkoveTvojeScore - 50;
+                    Console.WriteLine("Nyní jste si koupil TITUL. Napište prosím své jméno:");
+                    string uzivateljmeno = Console.ReadLine();
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"{uzivateljmeno} vlastní vzácný titul!");
+                    Console.ResetColor();
+                    idk.mamtitul = true;
+                    Thread.Sleep(2500);
+                    Console.Clear();
+                    goto titulbuy;
+
+                }
+                else if (Titulbuy == "Ano" && idk.celkoveTvojeScore != 50 || idk.mamtitul == true || idk.celkoveTvojeScore > 50)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi tohoto TITULU, nebo TITUL již vlastníš...");
+                    Console.WriteLine("(Po chvilce vás to hodí zpět do obchodu)");
+                    Thread.Sleep(5000);
+                    Console.Clear();
+                    goto nemamlove;
+                }
+                if (Titulbuy == "ne")
+                {
+                    Console.Clear();
+                    goto backtoshop;
+                }
+            }
+            #endregion titul
+            #region backtomenu
+            if (odpoved3 == "zpět do menu")
+            {
+                Console.Clear();
+                goto Loop;
+            }
+            #endregion backtomenu
+            #region doublescore
+            if (odpoved3 == "Double score - cost: 65 coins")
+            {
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"Máš těžce vydřených: {idk.celkoveTvojeScore} coins");
+                Console.ResetColor();
+                Console.WriteLine("------------------------------------------");
+
+                Console.WriteLine("Tato funkce vám dává 2x více coins za výhru...");
+                Console.WriteLine("Double score stojí 65 coins");
+                var DblScr = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Chcete si koupit Double score ?[/]")
+                        .PageSize(25)
+                        .AddChoices(new[] {
+            "Ano", "ne"
+                        }));
+                if (DblScr == "Ano" && idk.celkoveTvojeScore >= 65 && idk.doubleskore == false)
+                {
+
+
+                    idk.celkoveTvojeScore = idk.celkoveTvojeScore - 65;
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Zakoupil jste si Double score!");
+                    Console.ResetColor();
+                    idk.doubleskore = true;
+                    Thread.Sleep(2500);
+                    Console.Clear();
+                    goto dblyes;
+                }
+                else if (DblScr == "Ano" && idk.celkoveTvojeScore != 65 || idk.doubleskore == true || idk.celkoveTvojeScore > 65)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Vypadá to že nemáte dostatek coins na koupi Double score, nebo máte double score již zakoupeno...");
+                    Console.WriteLine("(Po chvilce vás to hodí zpět do obchodu)");
+                    Thread.Sleep(5000);
+                    Console.Clear();
+                    goto nemamlove2;
+                }
+                if (DblScr == "ne")
+                {
+                    Console.Clear();
+                    goto backtoshop2;
+                }
+            }
+            #endregion doublescore
+            #endregion shopbeta.
+        }
+        idk.ResetSkore();
 }
+
+
+#endregion shopmenu

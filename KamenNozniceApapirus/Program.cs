@@ -872,7 +872,17 @@ new SelectionPrompt<string>()
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine($"Code aktivován. K vašim coins bylo přidáno + 10 000 coins a máte {idk.celkoveTvojeScore} (a taky máte pravdu ) :)");
                 Console.ResetColor();
-                Thread.Sleep(2420);
+                Thread.Sleep(3500);
+                var image = new CanvasImage("obrazky/Gergelos.png");
+
+
+                image.MaxWidth(64);
+
+
+                AnsiConsole.Write(image);
+                Console.WriteLine("Stiskněte tlačítko pro vypnutí qr kódu");
+                Console.ReadKey();
+
                 Console.Clear();
                 goto dvacet;
             }
